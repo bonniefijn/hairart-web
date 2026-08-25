@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e6e6e3"/>
+      <stop offset="100%" stop-color="#a3a39d"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1200" fill="url(#g)"/>
+  <text x="50%" y="50%" font-family="Georgia, serif" font-size="30" fill="#0c0c0c" fill-opacity="0.5" text-anchor="middle" dominant-baseline="middle">Balayage 01</text>
+</svg>

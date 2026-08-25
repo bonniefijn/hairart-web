@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hair Art's — Balayage Studio</title>
+<meta name="description" content="The Hair Art's — Balayage Studio in Berlin. Handgemalte Balayage, Foilyage und moderne Colorationen.">
+<!-- VOR LIVEGANG ENTFERNEN: verhindert, dass Google die Preview mit Platzhalter-Impressum indexiert -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/lenis.css">
+<link rel="stylesheet" href="assets/css/style.css?v=11">
+</head>
+<body>
+
+<!-- Fixierter Bildhintergrund: Marilyn oben rechts, Audrey unten links, Lockenwickler oben links.
+     Sections scrollen darüber; transparente Zonen geben je nach Position ein anderes Motiv frei -->
+<div class="bg-portrait bg-portrait--tr" aria-hidden="true">
+  <img src="assets/images/hero/portrait-marilyn.png" alt="">
+</div>
+<div class="bg-portrait bg-portrait--bl" aria-hidden="true">
+  <img src="assets/images/hero/portrait-audrey.png" alt="">
+</div>
+<div class="bg-portrait bg-portrait--tl" aria-hidden="true">
+  <img src="assets/images/hero/portrait-rollers.png" alt="">
+</div>
+
+<!-- Logo-Badge: fixiertes Standbild im Hero, verblasst beim Runterscrollen -->
+<div class="logo-watermark" id="logoWatermark" aria-hidden="true">
+  <img src="assets/images/badge/logo-badge.png" alt="">
+</div>
+
+<!-- Schnellkontakt unten rechts: Anruf + WhatsApp -->
+<div class="quick-contact">
+  <a href="tel:+49303962576" class="qc-btn qc-call" aria-label="Salon anrufen">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6.6 3h3.2l1.6 4-2 1.3a12 12 0 0 0 5.3 5.3l1.3-2 4 1.6v3.2a1.6 1.6 0 0 1-1.7 1.6A16.4 16.4 0 0 1 5 4.7 1.6 1.6 0 0 1 6.6 3Z"
+            fill="currentColor"/>
+    </svg>
+  </a>
+  <a href="https://wa.me/491779718633" target="_blank" rel="noopener" class="qc-btn qc-wa" aria-label="Über WhatsApp schreiben">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M16 3.7C9.2 3.7 3.7 9.2 3.7 16c0 2.2.6 4.3 1.6 6.1L3.7 28.3l6.4-1.6c1.8 1 3.8 1.5 5.9 1.5 6.8 0 12.3-5.5 12.3-12.3S22.8 3.7 16 3.7Z"
+            fill="currentColor"/>
+      <path d="M22.3 19.4c-.34-.17-2-.99-2.31-1.1-.31-.11-.54-.17-.76.17-.23.34-.88 1.1-1.08 1.33-.2.22-.4.25-.73.08-.34-.17-1.43-.53-2.72-1.68-1.01-.9-1.69-2.01-1.89-2.35-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.22-.34.34-.56.11-.23.06-.42-.03-.6-.08-.16-.76-1.84-1.05-2.52-.27-.66-.55-.57-.76-.58h-.65c-.22 0-.59.08-.9.42-.31.34-1.19 1.16-1.19 2.83s1.22 3.29 1.39 3.51c.17.23 2.39 3.65 5.79 5.12.81.35 1.44.56 1.93.71.81.26 1.55.22 2.14.14.65-.1 2-.82 2.29-1.61.28-.79.28-1.47.2-1.61-.09-.14-.31-.23-.65-.4Z"
+            fill="#fff"/>
+    </svg>
+  </a>
+</div>
+
+<div class="page-content">
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="#home" class="logo">The Hair<span> Art's</span></a>
+
+    <nav class="nav-desktop">
+      <a href="#work">Work</a>
+      <a href="#salon">Salon</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#herren">Herren</a>
+      <a href="#braut">Braut</a>
+      <a href="#coiffeurin">Team</a>
+      <a href="#anfahrt">Anfahrt</a>
+    </nav>
+
+    <a href="#termin" class="btn btn-outline nav-cta">Termin buchen</a>
+
+    <button class="burger" id="burger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="#work">Work</a>
+    <a href="#salon">Salon</a>
+    <a href="#leistungen">Leistungen</a>
+    <a href="#herren">Herren</a>
+    <a href="#braut">Braut</a>
+    <a href="#coiffeurin">Team</a>
+    <a href="#anfahrt">Anfahrt</a>
+    <a href="#termin">Termin buchen</a>
+  </div>
+</header>
+
+<!-- ===== 1 · HERO ===== -->
+<section class="hero" id="home" data-focus="both">
+  <div class="hero-media" aria-hidden="true">
+    <video src="assets/videos/interior.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/hero/interieur.jpg"></video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="hero-actions reveal">
+      <a href="#termin" class="btn btn-primary">Termin anfragen</a>
+      <a href="#work" class="btn btn-ghost">Galerie ansehen</a>
+    </div>
+  </div>
+  <a href="#work" class="scroll-cue" aria-label="Nach unten scrollen"><span></span></a>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<section class="marquee">
+  <div class="marquee-track">
+    <span>Balayage</span><span>·</span><span>Money Piece</span><span>·</span>
+    <span>Foilyage</span><span>·</span><span>Color Melting</span><span>·</span>
+    <span>Blonding</span><span>·</span><span>Balayage</span><span>·</span>
+    <span>Money Piece</span><span>·</span><span>Foilyage</span><span>·</span>
+    <span>Color Melting</span><span>·</span><span>Blonding</span><span>·</span>
+  </div>
+</section>
+
+<!-- ===== 2 · WORK — Videos + Vorher/Nachher editorial ===== -->
+<section class="work" id="work">
+  <div class="container">
+    <p class="eyebrow center reveal">Arbeiten aus dem Studio</p>
+    <h2 class="center reveal">Farbe, die mitwächst</h2>
+    <p class="section-sub center reveal">Jede Farbe wird von Hand gesetzt — abgestimmt auf Hautton, Haarstruktur und darauf, wie viel Aufwand im Alltag realistisch ist.</p>
+  </div>
+
+  <!-- Video-Reihe -->
+  <div class="container work-videos">
+    <figure class="work-video reveal">
+      <video src="assets/videos/braun.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>Warmes Braun mit Tiefe</figcaption>
+    </figure>
+    <figure class="work-video reveal">
+      <video src="assets/videos/bob.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>Bob mit Volumen</figcaption>
+    </figure>
+    <figure class="work-video reveal">
+      <video src="assets/videos/blondstraehnen.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>Blonde Strähnen</figcaption>
+    </figure>
+  </div>
+
+  <!-- Vorher / Nachher -->
+  <div class="container ba-block">
+    <div class="ba-copy reveal">
+      <p class="eyebrow">Der Unterschied</p>
+      <h3>Vorher &amp; Nachher</h3>
+      <p>Der schönste Moment ist der Blick in den Spiegel am Ende. Mehr Volumen, weichere Übergänge und eine Farbe, die zum Gesicht passt statt gegen es zu arbeiten.</p>
+      <p>Und weil kein harter Ansatz entsteht, sieht der Look auch nach Wochen noch gut aus.</p>
+    </div>
+    <div class="ba-pair reveal">
+      <figure class="ba-item">
+        <img src="assets/images/work/vorher.jpg" alt="Vorher" loading="lazy">
+        <figcaption>Vorher</figcaption>
+      </figure>
+      <figure class="ba-item">
+        <img src="assets/images/work/nachher.jpg" alt="Nachher" loading="lazy">
+        <figcaption>Nachher</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- Weitere Arbeiten -->
+  <div class="container work-grid">
+    <figure class="work-item reveal"><img src="assets/images/work/classic.png" alt="Klassische Balayage in warmem Blond" loading="lazy"></figure>
+    <figure class="work-item reveal"><img src="assets/images/work/brunette.png" alt="Brünette Farbe mit weichen Übergängen" loading="lazy"></figure>
+    <figure class="work-item reveal"><img src="assets/images/work/shortbob.png" alt="Kurzer Bob mit Volumen" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- Reveal-Zone: Marilyn tritt hervor -->
+<section class="reveal-gap" data-focus="marilyn" aria-hidden="true"></section>
+
+<!-- ===== 3 · ÜBER DEN SALON ===== -->
+<section class="salon" id="salon">
+  <div class="container salon-grid">
+    <div class="salon-media reveal">
+      <video src="assets/videos/fotowand.mp4" muted loop playsinline preload="metadata"
+             aria-label="Blick in das Studio von The Hair Art's"></video>
+    </div>
+    <div class="salon-copy reveal">
+      <p class="eyebrow">Das Studio</p>
+      <h2>Zeit für einen Kopf</h2>
+      <p>Bei uns läuft nichts im Akkord. Jeder Termin bekommt die Zeit, die er braucht — mit Beratung am Anfang, damit am Ende auch wirklich das herauskommt, was du dir vorgestellt hast.</p>
+      <p>Helle Räume, Pflanzenwand, guter Kaffee. Ein Ort, an dem man sich hinsetzen und kurz abschalten kann.</p>
+      <ul class="about-points">
+        <li>Ausführliche Farbberatung vor jeder Behandlung</li>
+        <li>Pflegende Technik, die das Haar nicht strapaziert</li>
+        <li>Schnitte, die zum Typ passen und Volumen bringen</li>
+        <li>Ehrliche Empfehlung, auch wenn sie günstiger ausfällt</li>
+      </ul>
+      <a href="#termin" class="btn btn-primary">Termin sichern</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4 · LEISTUNGEN & PREISE ===== -->
+<section class="leistungen" id="leistungen">
+  <div class="container">
+    <p class="eyebrow center reveal">Leistungen</p>
+    <h2 class="center reveal">Was wir machen</h2>
+    <p class="section-sub center reveal">Die Preise sind Richtwerte — was es wirklich kostet, hängt von Haarlänge und Aufwand ab. Das besprechen wir vorher, damit es keine Überraschung gibt.</p>
+
+    <!-- TODO: Preise mit der Inhaberin abgleichen und anpassen -->
+    <div class="price-list">
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Balayage</h3>
+          <p>Von Hand gemalte Strähnen für weiche, sonnige Übergänge — wächst ohne harte Kante heraus.</p>
+        </div>
+        <span class="price-tag">ab 165 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Foilyage</h3>
+          <p>Balayage kombiniert mit Folien. Für alle, die es heller und kontrastreicher mögen.</p>
+        </div>
+        <span class="price-tag">ab 145 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Money Piece</h3>
+          <p>Gezielt aufgehellte Strähnen rund ums Gesicht. Kleiner Eingriff, große Wirkung.</p>
+        </div>
+        <span class="price-tag">ab 75 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Blondierung</h3>
+          <p>Vollflächige Aufhellung — in Etappen, wenn das Haar es braucht. Gesundheit geht vor Geschwindigkeit.</p>
+        </div>
+        <span class="price-tag">ab 190 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Gloss &amp; Pflege</h3>
+          <p>Frischt Nuance und Glanz zwischen zwei Farbterminen auf. Ideal alle sechs bis acht Wochen.</p>
+        </div>
+        <span class="price-tag">ab 55 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Schnitt &amp; Styling</h3>
+          <p>Waschen, Schneiden, Föhnen — mit Fokus auf Volumen und eine Form, die auch zu Hause hält.</p>
+        </div>
+        <span class="price-tag">ab 65 €</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reveal-Zone: Lockenwickler-Motiv tritt hervor -->
+<section class="reveal-gap" data-focus="rollers" aria-hidden="true"></section>
+
+<!-- ===== 5 · HERREN & JUNGS — Spezialisierung Locken ===== -->
+<section class="herren" id="herren">
+  <div class="container herren-grid">
+    <div class="herren-copy reveal">
+      <p class="eyebrow">Für ihn</p>
+      <h2>Herren &amp; Jungs</h2>
+      <p class="lead">Spezialisiert auf Locken</p>
+      <p>Locken brauchen einen anderen Schnitt als glattes Haar. Wir schneiden sie trocken und Locke für Locke — so bleibt die Sprungkraft erhalten und der Kopf bekommt Form statt Masse.</p>
+      <p>Vom Kind bis zum Erwachsenen. Und wer nicht weiß, was mit seinen Locken anzufangen ist, bekommt zum Schluss noch die passende Pflege gezeigt.</p>
+      <ul class="about-points">
+        <li>Trockenschnitt, Locke für Locke</li>
+        <li>Form, die auch ungestylt sitzt</li>
+        <li>Pflegetipps für zu Hause</li>
+        <li>Auch für Kinder und Jugendliche</li>
+      </ul>
+      <a href="#termin" class="btn btn-primary">Termin anfragen</a>
+    </div>
+    <div class="herren-media reveal">
+      <figure class="herren-img herren-img--a">
+        <img src="assets/images/herren/locken-01.png" alt="Lockenschnitt für Herren im Studio" loading="lazy">
+      </figure>
+      <figure class="herren-img herren-img--b">
+        <img src="assets/images/herren/locken-02.png" alt="Definierte Locken nach dem Trockenschnitt" loading="lazy">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRAUT — Brautfrisuren ===== -->
+<section class="braut" id="braut">
+  <div class="container braut-grid">
+    <div class="braut-media reveal">
+      <figure class="braut-img braut-img--a">
+        <img src="assets/images/braut/braut-01.jpg" alt="Hochsteckfrisur mit Schleier" loading="lazy">
+      </figure>
+      <figure class="braut-img braut-img--b">
+        <img src="assets/images/braut/braut-02.jpg" alt="Geflochtener Dutt mit Perlennadeln" loading="lazy">
+      </figure>
+      <figure class="braut-img braut-img--c">
+        <img src="assets/images/braut/braut-03.jpg" alt="Braut mit Lockenfrisur und Brautstrauß" loading="lazy">
+      </figure>
+    </div>
+    <div class="braut-copy reveal">
+      <p class="eyebrow">Für den großen Tag</p>
+      <h2>Brautfrisuren</h2>
+      <p class="lead">Damit am Hochzeitstag alles sitzt</p>
+      <p>Eine Brautfrisur ist Vertrauenssache. Deshalb beginnt jede Buchung mit einem Probetermin — wir testen die Frisur in Ruhe, gleichen sie mit Kleid, Schleier und Frisuraufsatz ab und passen an, bis es genau richtig ist.</p>
+      <p>Am Tag selbst zählt vor allem eins: dass die Frisur hält. Von zart bis aufwendig, mit oder ohne Schleier befestigt.</p>
+      <ul class="about-points">
+        <li>Probetermin vor der Hochzeit inklusive</li>
+        <li>Abstimmung auf Kleid, Schleier und Deko</li>
+        <li>Langer Halt für den ganzen Tag und die Nacht</li>
+        <li>Auf Wunsch Termine vor Ort für die ganze Gruppe</li>
+      </ul>
+      <a href="#termin" class="btn btn-primary">Probetermin anfragen</a>
+    </div>
+  </div>
+</section>
+
+<!-- Reveal-Zone: Audrey tritt hervor -->
+<section class="reveal-gap" data-focus="audrey" aria-hidden="true"></section>
+
+<!-- ===== 6 · DIE COIFFEURIN ===== -->
+<section class="coiffeurin" id="coiffeurin">
+  <div class="container coiffeurin-grid">
+    <div class="coiffeurin-media reveal">
+      <figure class="coiffeurin-img coiffeurin-img--a">
+        <img src="assets/images/team/coiffeurin-01.png" alt="Die Inhaberin von The Hair Art's im Salon" loading="lazy">
+      </figure>
+      <figure class="coiffeurin-img coiffeurin-img--b">
+        <img src="assets/images/team/coiffeurin-02.png" alt="Die Coiffeurin vor dem Studio" loading="lazy">
+      </figure>
+      <figure class="coiffeurin-img coiffeurin-img--c">
+        <img src="assets/images/team/coiffeurin-03.png" alt="Portrait der Coiffeurin" loading="lazy">
+      </figure>
+    </div>
+    <div class="coiffeurin-copy reveal">
+      <p class="eyebrow">Hinter dem Stuhl</p>
+      <h2>Die Coiffeurin</h2>
+      <p>Farbe ist Handwerk und ein bisschen Bauchgefühl. Nach Jahren hinter dem Stuhl sieht man schnell, was zu einem Gesicht passt — und was jemand im Alltag wirklich pflegen mag.</p>
+      <p>Deshalb kommt vor jeder Behandlung das Gespräch. Was gefällt dir an deinen Haaren, was stört dich, wie viel Zeit hast du morgens? Daraus wird der Look.</p>
+      <p>Am Ende zählt nur eins: dass du zufrieden rausgehst und dich in ein paar Wochen wieder gerne hinsetzt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7 · ANFAHRT ===== -->
+<section class="anfahrt" id="anfahrt">
+  <div class="container">
+    <p class="eyebrow center reveal">Anfahrt</p>
+    <h2 class="center reveal">So findest du uns</h2>
+    <p class="section-sub center reveal">Mitten in Moabit, gut erreichbar — mit der Bahn genauso wie mit dem Auto.</p>
+
+    <div class="anfahrt-grid">
+      <div class="anfahrt-card reveal">
+        <span class="anfahrt-num">01</span>
+        <h3>Adresse</h3>
+        <p>Stromstr. 37<br>10551 Berlin</p>
+      </div>
+      <div class="anfahrt-card reveal">
+        <span class="anfahrt-num">02</span>
+        <h3>Öffentlich</h3>
+        <p>U9 Birkenstraße und die Buslinien in der Stromstraße liegen nur wenige Minuten entfernt.</p>
+      </div>
+      <div class="anfahrt-card reveal">
+        <span class="anfahrt-num">03</span>
+        <h3>Parken</h3>
+        <p>In den Seitenstraßen rund um die Stromstraße findet sich meist ein Platz. Plan ein paar Minuten mehr ein.</p>
+      </div>
+    </div>
+
+    <!-- Zwei-Klick-Karte: Google Maps lädt erst nach Zustimmung (DSGVO).
+         Adresse zentral in assets/js/script.js unter SALON_ADRESSE pflegen. -->
+    <div class="anfahrt-map reveal" id="mapWrap">
+      <div class="map-consent" id="mapConsent">
+        <h3>Karte ansehen</h3>
+        <p>Beim Laden der Karte werden Daten an Google übertragen — unter anderem deine IP-Adresse. Näheres in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+        <div class="map-consent-actions">
+          <button type="button" class="btn btn-primary" id="mapLoadBtn">Karte laden</button>
+          <a class="btn btn-ghost" id="mapExternal" href="#" target="_blank" rel="noopener">In Google Maps öffnen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8 · TERMIN BUCHEN ===== -->
+<section class="termin" id="termin">
+  <div class="container termin-grid">
+    <div class="termin-copy reveal">
+      <p class="eyebrow">Kontakt</p>
+      <h2>Termin buchen</h2>
+      <p>Schreib uns, was dir vorschwebt — je mehr wir vorher wissen, desto besser können wir Zeit und Aufwand einplanen. Wir melden uns mit freien Terminen zurück.</p>
+      <p>Am schnellsten geht es per Instagram-DM. Du bist unsicher, was zu dir passt? Schreib es einfach dazu, dann klären wir das im Gespräch.</p>
+
+      <div class="contact-details">
+        <div>
+          <span class="label">Adresse</span>
+          <span>Stromstr. 37, 10551 Berlin</span>
+        </div>
+        <div>
+          <span class="label">Telefon</span>
+          <a href="tel:+49303962576">030 / 396 25 76</a>
+        </div>
+        <div>
+          <span class="label">Mobil &amp; WhatsApp</span>
+          <a href="tel:+491779718633">0177 971 8633</a>
+        </div>
+        <div>
+          <span class="label">E-Mail</span>
+          <a href="mailto:elifozserik11@gmail.com">elifozserik11@gmail.com</a>
+        </div>
+        <div>
+          <span class="label">Öffnungszeiten</span>
+          <span>Di–Fr 09:00–18:00<br>Sa 09:00–16:00<br>Mo geschlossen</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm">
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required placeholder="Dein Name">
+      </div>
+      <div class="form-row">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" required placeholder="deine@mail.de">
+      </div>
+      <div class="form-row">
+        <label for="phone">Telefon</label>
+        <input type="tel" id="phone" name="phone" placeholder="+49 170 0000000">
+      </div>
+      <div class="form-row">
+        <label for="service">Wunschleistung</label>
+        <select id="service" name="service">
+          <option>Balayage</option>
+          <option>Foilyage</option>
+          <option>Money Piece</option>
+          <option>Blondierung</option>
+          <option>Gloss &amp; Pflege</option>
+          <option>Schnitt &amp; Styling</option>
+          <option>Herren &amp; Jungs — Locken</option>
+          <option>Ich bin unsicher — bitte beraten</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="wunschtermin">Wunschtermin</label>
+        <input type="date" id="wunschtermin" name="wunschtermin">
+      </div>
+      <div class="form-row">
+        <label for="message">Was soll gemacht werden?</label>
+        <textarea id="message" name="message" rows="5" placeholder="Aktuelle Haarfarbe, Wunschergebnis, wann du zuletzt gefärbt hast — alles, was hilft…"></textarea>
+      </div>
+      <p class="send-label">Anfrage senden über</p>
+      <div class="send-options">
+        <button type="button" class="btn send-wa" data-send="whatsapp">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C9.4 4 4 9.4 4 16c0 2.3.6 4.4 1.7 6.3L4 28l5.9-1.7A11.9 11.9 0 0 0 16 28c6.6 0 12-5.4 12-12S22.6 4 16 4Z" fill="currentColor"/></svg>
+          WhatsApp
+        </button>
+        <button type="button" class="btn send-ig" data-send="instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.6" cy="6.4" r="1.3" fill="currentColor"/></svg>
+          Instagram DM
+        </button>
+        <button type="button" class="btn send-mail" data-send="email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3 6 9 6.5L21 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          E-Mail
+        </button>
+      </div>
+      <p class="form-note" id="formNote"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== INSTAGRAM ===== -->
+<section class="instagram" id="instagram">
+  <div class="container">
+    <p class="eyebrow center reveal">Social</p>
+    <h2 class="center reveal">Folge The Hair Art's auf Instagram</h2>
+    <a href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener" class="ig-handle reveal">@coiffeur_elif_</a>
+
+    <div class="instagram-grid" id="instagramGrid">
+      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
+        <img src="assets/images/instagram/ig-01.svg" alt="Instagram-Beitrag 1 von The Hair Art's" loading="lazy">
+        <span class="ig-icon">↗</span>
+      </a>
+      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
+        <img src="assets/images/instagram/ig-02.svg" alt="Instagram-Beitrag 2 von The Hair Art's" loading="lazy">
+        <span class="ig-icon">↗</span>
+      </a>
+      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
+        <img src="assets/images/instagram/ig-03.svg" alt="Instagram-Beitrag 3 von The Hair Art's" loading="lazy">
+        <span class="ig-icon">↗</span>
+      </a>
+      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
+        <img src="assets/images/instagram/ig-04.svg" alt="Instagram-Beitrag 4 von The Hair Art's" loading="lazy">
+        <span class="ig-icon">↗</span>
+      </a>
+      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
+        <img src="assets/images/instagram/ig-05.svg" alt="Instagram-Beitrag 5 von The Hair Art's" loading="lazy">
+        <span class="ig-icon">↗</span>
+      </a>
+      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
+        <img src="assets/images/instagram/ig-06.svg" alt="Instagram-Beitrag 6 von The Hair Art's" loading="lazy">
+        <span class="ig-icon">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 9 · IMPRESSUM / RECHTLICHES ===== -->
+<section class="legal" id="impressum">
+  <div class="container legal-grid">
+    <div class="legal-col reveal">
+      <h3>Impressum</h3>
+      <p>Anbieterkennzeichnung nach § 5 DDG — Inhaberin, Anschrift, Kontakt und Kammerzugehörigkeit.</p>
+      <a href="impressum.html" class="legal-link">Impressum ansehen →</a>
+    </div>
+    <div class="legal-col reveal">
+      <h3>Datenschutz</h3>
+      <p>Welche Daten bei einer Terminanfrage verarbeitet werden, wie lange sie gespeichert bleiben und welche Rechte du hast.</p>
+      <a href="datenschutz.html" class="legal-link">Datenschutz ansehen →</a>
+    </div>
+    <div class="legal-col reveal">
+      <h3>Widerruf</h3>
+      <p>Widerrufsrecht bei Verträgen, die über Formular, WhatsApp, Instagram oder Telefon geschlossen werden.</p>
+      <a href="widerruf.html" class="legal-link">Widerrufsbelehrung ansehen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="#home" class="logo">The Hair<span> Art's</span></a>
+    <div class="footer-links">
+      <a href="#work">Work</a>
+      <a href="#salon">Salon</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#herren">Herren</a>
+      <a href="#braut">Braut</a>
+      <a href="#coiffeurin">Team</a>
+      <a href="#anfahrt">Anfahrt</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="widerruf.html">Widerruf</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">Instagram</a>
+      <a href="tel:+49303962576">Telefon</a>
+      <a href="mailto:elifozserik11@gmail.com">E-Mail</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> The Hair Art's</span>
+    <span>Made for the Pitch</span>
+  </div>
+</footer>
+
+</div>
+
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/script.js?v=4"></script>
+</body>
+</html>

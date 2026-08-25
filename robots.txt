@@ -1,0 +1,3 @@
+# Preview-Stand — vor Livegang auf "Allow: /" umstellen
+User-agent: *
+Disallow: /
