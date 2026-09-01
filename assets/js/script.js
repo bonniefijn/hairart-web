@@ -45,12 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
     touchMultiplier: 1.6,
   });
 
-  // Anker-Links über Lenis führen
+  // Anker-Links über Lenis führen.
+  // data-preselect: der CTA einer Section wählt die passende Leistung im Formular vor
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const target = document.querySelector(link.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
+
+      const wunsch = link.dataset.preselect;
+      if (wunsch) {
+        const sel = document.getElementById('service');
+        const treffer = sel && [...sel.options].find(o => o.value.toLowerCase().includes(wunsch.toLowerCase()));
+        if (treffer) sel.value = treffer.value;
+      }
+
       lenis.scrollTo(target, { offset: -70 });
     });
   });

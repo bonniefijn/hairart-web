@@ -12,20 +12,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bevan&family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/lenis.css">
-<link rel="stylesheet" href="assets/css/style.css?v=11">
+<link rel="stylesheet" href="assets/css/style.css?v=16">
 </head>
 <body>
 
 <!-- Fixierter Bildhintergrund: Marilyn oben rechts, Audrey unten links, Lockenwickler oben links.
      Sections scrollen darüber; transparente Zonen geben je nach Position ein anderes Motiv frei -->
 <div class="bg-portrait bg-portrait--tr" aria-hidden="true">
-  <img src="assets/images/hero/portrait-marilyn.png" alt="">
+  <img src="assets/images/hero/portrait-marilyn.jpg" alt="">
 </div>
 <div class="bg-portrait bg-portrait--bl" aria-hidden="true">
-  <img src="assets/images/hero/portrait-audrey.png" alt="">
+  <img src="assets/images/hero/portrait-audrey.jpg" alt="">
 </div>
 <div class="bg-portrait bg-portrait--tl" aria-hidden="true">
-  <img src="assets/images/hero/portrait-rollers.png" alt="">
+  <img src="assets/images/hero/portrait-rollers.jpg" alt="">
 </div>
 
 <!-- Logo-Badge: fixiertes Standbild im Hero, verblasst beim Runterscrollen -->
@@ -90,7 +90,7 @@
 <!-- ===== 1 · HERO ===== -->
 <section class="hero" id="home" data-focus="both">
   <div class="hero-media" aria-hidden="true">
-    <video src="assets/videos/interior.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/hero/interieur.jpg"></video>
+    <video src="assets/videos/interior.mp4" autoplay muted loop playsinline preload="metadata" poster="assets/images/hero/interieur.jpg"></video>
   </div>
   <div class="hero-overlay"></div>
   <div class="container hero-content">
@@ -113,6 +113,41 @@
   </div>
 </section>
 
+<!-- ===== ÜBERBLICK — anklickbare Einstiege, führen zu den Sections ===== -->
+<section class="ueberblick">
+  <div class="container ueberblick-grid">
+
+    <a href="#leistungen" class="ue-card reveal">
+      <span class="ue-tag">Leistungen</span>
+      <h3>Balayage &amp; Farbe</h3>
+      <p>Handgemalte Strähnen, Foilyage, Blondierung — mit Richtpreisen.</p>
+      <span class="ue-more">Preise ansehen</span>
+    </a>
+
+    <a href="#herren" class="ue-card reveal" data-preselect="Herrenschnitt">
+      <span class="ue-tag">Für ihn</span>
+      <h3>Herren &amp; Jungs</h3>
+      <p>Schnitt, Bart und Übergänge — spezialisiert auf Locken.</p>
+      <span class="ue-more">Mehr dazu</span>
+    </a>
+
+    <a href="#braut" class="ue-card reveal" data-preselect="Brautfrisur">
+      <span class="ue-tag">Für den großen Tag</span>
+      <h3>Brautfrisuren</h3>
+      <p>Mit Probetermin, abgestimmt auf Kleid und Schleier.</p>
+      <span class="ue-more">Ansehen</span>
+    </a>
+
+    <a href="#termin" class="ue-card ue-card--dark reveal">
+      <span class="ue-tag">Termin</span>
+      <h3>Direkt anfragen</h3>
+      <p>Über WhatsApp, Instagram oder E-Mail — ganz wie es dir lieber ist.</p>
+      <span class="ue-more">Termin anfragen</span>
+    </a>
+
+  </div>
+</section>
+
 <!-- ===== 2 · WORK — Videos + Vorher/Nachher editorial ===== -->
 <section class="work" id="work">
   <div class="container">
@@ -124,15 +159,15 @@
   <!-- Video-Reihe -->
   <div class="container work-videos">
     <figure class="work-video reveal">
-      <video src="assets/videos/braun.mp4" muted loop playsinline preload="metadata"></video>
+      <video src="assets/videos/braun.mp4" muted loop playsinline preload="none"></video>
       <figcaption>Warmes Braun mit Tiefe</figcaption>
     </figure>
     <figure class="work-video reveal">
-      <video src="assets/videos/bob.mp4" muted loop playsinline preload="metadata"></video>
+      <video src="assets/videos/bob.mp4" muted loop playsinline preload="none"></video>
       <figcaption>Bob mit Volumen</figcaption>
     </figure>
     <figure class="work-video reveal">
-      <video src="assets/videos/blondstraehnen.mp4" muted loop playsinline preload="metadata"></video>
+      <video src="assets/videos/blondstraehnen.mp4" muted loop playsinline preload="none"></video>
       <figcaption>Blonde Strähnen</figcaption>
     </figure>
   </div>
@@ -172,7 +207,7 @@
 <section class="salon" id="salon">
   <div class="container salon-grid">
     <div class="salon-media reveal">
-      <video src="assets/videos/fotowand.mp4" muted loop playsinline preload="metadata"
+      <video src="assets/videos/fotowand.mp4" muted loop playsinline preload="none"
              aria-label="Blick in das Studio von The Hair Art's"></video>
     </div>
     <div class="salon-copy reveal">
@@ -242,6 +277,27 @@
         </div>
         <span class="price-tag">ab 65 €</span>
       </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Herrenschnitt</h3>
+          <p>Schere und Maschine, saubere Übergänge und Konturen. Auf Wunsch mit Bart.</p>
+        </div>
+        <span class="price-tag">ab 30 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Lockenschnitt</h3>
+          <p>Trocken geschnitten, Locke für Locke. Für Herren und Jungs mit Naturlocke.</p>
+        </div>
+        <span class="price-tag">ab 45 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Kinderschnitt</h3>
+          <p>Bis 12 Jahre. In Ruhe und ohne Hektik — auch beim ersten Mal.</p>
+        </div>
+        <span class="price-tag">ab 20 €</span>
+      </div>
     </div>
   </div>
 </section>
@@ -255,23 +311,23 @@
     <div class="herren-copy reveal">
       <p class="eyebrow">Für ihn</p>
       <h2>Herren &amp; Jungs</h2>
-      <p class="lead">Spezialisiert auf Locken</p>
-      <p>Locken brauchen einen anderen Schnitt als glattes Haar. Wir schneiden sie trocken und Locke für Locke — so bleibt die Sprungkraft erhalten und der Kopf bekommt Form statt Masse.</p>
-      <p>Vom Kind bis zum Erwachsenen. Und wer nicht weiß, was mit seinen Locken anzufangen ist, bekommt zum Schluss noch die passende Pflege gezeigt.</p>
+      <p class="lead">Schnitt, Bart und Locken</p>
+      <p>Vom klassischen Herrenschnitt über saubere Übergänge bis zum Bart — geschnitten wird mit Schere und Maschine, wie es die Form verlangt. Waschen, Schneiden und Styling gehören dazu.</p>
+      <p>Unsere Spezialität sind Locken: Die schneiden wir trocken und Locke für Locke, so bleibt die Sprungkraft erhalten und der Kopf bekommt Form statt Masse. Vom Kind bis zum Erwachsenen — und wer nicht weiß, was mit seinen Locken anzufangen ist, bekommt zum Schluss die passende Pflege gezeigt.</p>
       <ul class="about-points">
-        <li>Trockenschnitt, Locke für Locke</li>
-        <li>Form, die auch ungestylt sitzt</li>
-        <li>Pflegetipps für zu Hause</li>
-        <li>Auch für Kinder und Jugendliche</li>
+        <li>Herrenschnitt mit Schere und Maschine</li>
+        <li>Saubere Übergänge, Konturen und Bart</li>
+        <li>Locken im Trockenschnitt, Locke für Locke</li>
+        <li>Kinder- und Jugendschnitte</li>
       </ul>
-      <a href="#termin" class="btn btn-primary">Termin anfragen</a>
+      <a href="#termin" class="btn btn-primary" data-preselect="Herren">Termin anfragen</a>
     </div>
     <div class="herren-media reveal">
       <figure class="herren-img herren-img--a">
-        <img src="assets/images/herren/locken-01.png" alt="Lockenschnitt für Herren im Studio" loading="lazy">
+        <img src="assets/images/herren/locken-01.jpg" alt="Lockenschnitt für Herren im Studio" loading="lazy">
       </figure>
       <figure class="herren-img herren-img--b">
-        <img src="assets/images/herren/locken-02.png" alt="Definierte Locken nach dem Trockenschnitt" loading="lazy">
+        <img src="assets/images/herren/locken-02.jpg" alt="Definierte Locken nach dem Trockenschnitt" loading="lazy">
       </figure>
     </div>
   </div>
@@ -282,13 +338,13 @@
   <div class="container braut-grid">
     <div class="braut-media reveal">
       <figure class="braut-img braut-img--a">
-        <img src="assets/images/braut/braut-01.jpg" alt="Hochsteckfrisur mit Schleier" loading="lazy">
+        <img src="assets/images/braut/braut-01.jpg?v=2" alt="Halboffene Brautfrisur mit weichen Wellen und Blütenhaarschmuck" loading="lazy">
       </figure>
       <figure class="braut-img braut-img--b">
-        <img src="assets/images/braut/braut-02.jpg" alt="Geflochtener Dutt mit Perlennadeln" loading="lazy">
+        <img src="assets/images/braut/braut-03.jpg" alt="Tief sitzender Dutt mit Flechteinsatz und Perlennadeln" loading="lazy">
       </figure>
       <figure class="braut-img braut-img--c">
-        <img src="assets/images/braut/braut-03.jpg" alt="Braut mit Lockenfrisur und Brautstrauß" loading="lazy">
+        <img src="assets/images/braut/braut-02.jpg" alt="Braut mit hochgesteckten Locken und Brautstrauß" loading="lazy">
       </figure>
     </div>
     <div class="braut-copy reveal">
@@ -303,7 +359,7 @@
         <li>Langer Halt für den ganzen Tag und die Nacht</li>
         <li>Auf Wunsch Termine vor Ort für die ganze Gruppe</li>
       </ul>
-      <a href="#termin" class="btn btn-primary">Probetermin anfragen</a>
+      <a href="#termin" class="btn btn-primary" data-preselect="Brautfrisur">Probetermin anfragen</a>
     </div>
   </div>
 </section>
@@ -332,6 +388,18 @@
       <p>Deshalb kommt vor jeder Behandlung das Gespräch. Was gefällt dir an deinen Haaren, was stört dich, wie viel Zeit hast du morgens? Daraus wird der Look.</p>
       <p>Am Ende zählt nur eins: dass du zufrieden rausgehst und dich in ein paar Wochen wieder gerne hinsetzt.</p>
     </div>
+  </div>
+</section>
+
+<!-- ===== BEAUTY — bewusst leise gehalten, nur ein Hinweis ===== -->
+<section class="beauty" id="beauty">
+  <div class="container beauty-inner reveal">
+    <p class="eyebrow">Übrigens</p>
+    <p class="beauty-line">nicht nur Haare</p>
+    <p class="beauty-text">Im Studio gibt es auch kosmetische Behandlungen — von Faltenbehandlung
+      über Hautpflege bis zu allem, was dazugehört. Sprich uns einfach an, wir beraten dich in Ruhe
+      und ohne Verpflichtung.</p>
+    <a href="#termin" class="beauty-link" data-preselect="Beauty">Beratung anfragen</a>
   </div>
 </section>
 
@@ -430,7 +498,11 @@
           <option>Blondierung</option>
           <option>Gloss &amp; Pflege</option>
           <option>Schnitt &amp; Styling</option>
+          <option>Herrenschnitt</option>
           <option>Herren &amp; Jungs — Locken</option>
+          <option>Kinderschnitt</option>
+          <option>Brautfrisur (inkl. Probetermin)</option>
+          <option>Beauty — kosmetische Beratung</option>
           <option>Ich bin unsicher — bitte beraten</option>
         </select>
       </div>
@@ -550,6 +622,6 @@
 </div>
 
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/script.js?v=4"></script>
+<script src="assets/js/script.js?v=6"></script>
 </body>
 </html>
