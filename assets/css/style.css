@@ -455,8 +455,40 @@ body.focus-rollers .bg-portrait--bl{ opacity: .14; }
 .work{
   padding: 110px 0 100px;
   background: var(--anthracite);
+  position: relative;
 }
 .work h2{ font-size: clamp(28px, 3.6vw, 40px); margin-bottom: 8px; }
+/* Inhalt liegt über dem Charm */
+.work > .container{ position: relative; z-index: 1; }
+
+/* ===== Charm: Pfingstrose ===== */
+.charm{
+  position: absolute;
+  z-index: 0;
+  line-height: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.charm img{ width: 100%; height: auto; }
+
+.charm--work{
+  top: 34px;
+  /* rechts neben dem Container, auf schmalen Viewports an den Rand */
+  right: max(14px, calc(50% - var(--container) / 2 - 46px));
+  width: clamp(160px, 19vw, 280px);
+}
+.charm--work.is-visible{ opacity: .88; }
+.charm--work img{
+  transform: rotate(-8deg);
+  animation: charm-float 12s ease-in-out infinite;
+}
+@keyframes charm-float{
+  0%, 100%{ transform: rotate(-8deg) translateY(0); }
+  50%     { transform: rotate(-4.5deg) translateY(-16px); }
+}
+@media (prefers-reduced-motion: reduce){
+  .charm--work img{ animation: none; }
+}
 
 .work-videos{
   display: grid;
@@ -1097,6 +1129,9 @@ body.focus-rollers .bg-portrait--bl{ opacity: .14; }
   .container{ padding: 0 20px; }
   .hero-content{ padding-bottom: 80px; }
   .work-videos, .work-grid, .anfahrt-grid, .legal-grid{ grid-template-columns: 1fr; }
+  /* Charm dezenter, damit er die zentrierte Headline nicht stoert */
+  .charm--work{ top: 12px; right: 0; width: 128px; }
+  .charm--work.is-visible{ opacity: .6; }
   .instagram-grid{ grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .contact-form{ padding: 30px 22px; }
   .price-row{ flex-direction: column; gap: 8px; }
