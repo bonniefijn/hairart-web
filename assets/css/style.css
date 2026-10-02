@@ -5,22 +5,40 @@
 
 :root{
   --white:        #ffffff;
-  /* Helle Section-Flächen — Namen bleiben, damit die Struktur unverändert bleibt */
-  --anthracite:   #f4f4f2;   /* helles Grau */
+  /* Helle Section-Flächen — Namen bleiben, damit die Struktur unverändert bleibt.
+     Das Grau hat jetzt einen Hauch Rosé statt Grünstich: weicher, wärmer. */
+  --anthracite:   #f7f4f3;   /* warmes Hellgrau */
   --anthracite-2: #ffffff;   /* weiß */
   --black:        #141416;
-  --ink:          #1a1a1a;
-  --ink-soft:     #6f6f6a;
-  --line:         rgba(0,0,0,.11);
+  --ink:          #1f1c1d;
+  --ink-soft:     #78706f;
+  --line:         rgba(40,20,20,.10);
   --accent:       #141416;
+
+  /* Anthrazit vom Schild am Salon — nach Augenmaß aus dem Foto bestimmt.
+     Wenn das Foto im Ordner liegt, lässt sich der Wert exakt nachmessen. */
+  --stone:        #4a4e4c;
+  --stone-deep:   #383b3a;
+
+  /* Pastellakzent — Babyrosa, kühl gehalten aber nicht violett */
+  --blush:        #ecc9dd;
+  --blush-soft:   #faedf5;
+  /* Babyrosa für die Logo-Kontur */
+  --neon:         #f1b8d6;
 
   --font-display: 'Jost', sans-serif;
   --font-body: 'Jost', sans-serif;
   --font-italic: 'Cormorant Garamond', serif;
 
   --container: 1180px;
-  --radius: 14px;
-  --radius-sm: 8px;
+  --radius: 26px;
+  --radius-sm: 16px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 10px 30px rgba(70,45,45,.07);
+  --shadow-lift: 0 20px 48px rgba(70,45,45,.12);
+  /* Babyrosa-Duotone statt Schwarz-Weiß. Werte nachgerechnet:
+     einen Hauch kühler als Babyrosa, knapp vor Violett */
+  --tint: grayscale(1) sepia(.48) hue-rotate(-67deg) saturate(1.32) contrast(1.02);
   --transition: 0.5s cubic-bezier(.22,.61,.36,1);
 }
 
@@ -89,18 +107,18 @@ h2.center{ text-align: center; }
   white-space: nowrap;
 }
 .btn-primary{
-  background: var(--black);
+  background: var(--stone);
   color: var(--white);
-  border-color: var(--black);
+  border-color: var(--stone);
 }
-.btn-primary:hover{ background: transparent; color: var(--black); }
+.btn-primary:hover{ background: transparent; color: var(--stone); }
 
 .btn-outline{
   border-color: var(--black);
   color: var(--black);
   padding: 13px 28px;
 }
-.btn-outline:hover{ background: var(--black); color: var(--white); }
+.btn-outline:hover{ background: var(--blush); border-color: var(--blush); color: var(--black); }
 
 .btn-ghost{
   color: var(--black);
@@ -109,6 +127,8 @@ h2.center{ text-align: center; }
   padding: 16px 4px;
 }
 .btn-ghost:hover{ color: var(--ink-soft); border-color: var(--ink-soft); }
+/* Der Haupt-Link bekommt nur etwas mehr Gewicht, keine andere Form */
+.btn-ghost--stark{ font-weight: 500; border-bottom-width: 2px; }
 
 .btn-block{ width: 100%; }
 
@@ -136,7 +156,7 @@ h2.center{ text-align: center; }
 .bg-portrait img{
   width: 100%; height: 100%;
   object-fit: contain;
-  filter: grayscale(1) contrast(1.05);
+  filter: var(--tint);
 }
 .bg-portrait--tr{ top: 0; right: 0; }
 .bg-portrait--tr img{ object-position: right top; }
@@ -151,6 +171,33 @@ body.focus-marilyn .bg-portrait--tr{ opacity: .85; }
 body.focus-audrey  .bg-portrait--bl{ opacity: .85; }
 body.focus-rollers .bg-portrait--tl{ opacity: .85; }
 
+/* ===== Ornamentale Ranke =====
+   Liegt über den Sections, aber am äußersten Rand und sehr zurückgenommen —
+   als Zeichnung auf dem Papier, nicht als Element im Layout. */
+.ranke{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+  width: min(15vw, 168px);
+  height: 88vh;
+  pointer-events: none;
+  color: var(--blush);
+  opacity: .8;
+}
+.ranke svg{ width: 100%; height: 100%; }
+.ranke path{
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+/* Auf schmalen Schirmen ist kein Platz für sie */
+@media (max-width: 900px){
+  .ranke{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .ranke path{ stroke-dashoffset: 0; }
+}
+
 /* Logo-Badge: fixiertes Standbild, Opacity wird per JS über den Scrollfortschritt gesteuert */
 .logo-watermark{
   position: fixed;
@@ -161,14 +208,36 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   transform: translate(-50%, -50%);
   pointer-events: none;
   opacity: .92;
-  will-change: opacity, transform;
+  /* will-change bewusst entfernt: die eigene GPU-Ebene erzeugte in Safari
+     eine sichtbare rechteckige Kante um das Logo. */
 }
 .logo-watermark img{
   width: 100%;
   display: block;
-  filter: drop-shadow(0 12px 30px rgba(0,0,0,.35));
+  /* Neon-Kontur: enger heller Kern, davor zwei weiche Höfe.
+     Folgt dem Alphakanal, liegt also exakt auf der Logokante. */
+  filter:
+    drop-shadow(0 0 0.6px var(--neon))
+    drop-shadow(0 0 2px   rgba(245, 188, 210, .75))
+    drop-shadow(0 0 7px   rgba(245, 188, 210, .32));
 }
-.logo-watermark.is-hidden{ display: none; }
+.logo-watermark{
+  transition: opacity 1.1s ease, filter 1.1s ease;
+}
+/* Ab der zweiten Section rutscht das Logo HINTER den Seiteninhalt (z-index 0).
+   Es bleibt fixiert stehen, die Sections scrollen darüber hinweg — es bewegt
+   sich also nicht mit und drängt sich nicht mehr in den Vordergrund. */
+.logo-watermark.is-back,
+.logo-watermark.is-quiet{
+  z-index: 0;
+  transform: translate(-50%, -50%);
+}
+.logo-watermark.is-back{ opacity: 0; }
+.logo-watermark.is-quiet{ opacity: .62; }
+
+@media (prefers-reduced-motion: reduce){
+  .logo-watermark{ transition: opacity .3s ease; }
+}
 
 @media (max-width: 700px){
   .logo-watermark{ width: 62vw; }
@@ -199,8 +268,13 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
 .qc-btn svg{ width: 24px; height: 24px; }
 .qc-btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.3); }
 
-.qc-call{ background: var(--black); color: var(--white); }
+.qc-call{ background: var(--stone); color: var(--white); }
 .qc-wa{ background: #25D366; color: #fff; }
+/* Instagram in seinen eigenen Markenfarben, wie WhatsApp daneben */
+.qc-ig{
+  background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 48%, #6228d7 100%);
+  color: #fff;
+}
 
 @media (max-width: 600px){
   .quick-contact{ right: 18px; bottom: 18px; gap: 10px; }
@@ -316,6 +390,9 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   inset: 0;
   overflow: hidden;
   z-index: 0;
+  /* Durchschnittston des Hero-Videos, aus dem ersten Bild gemessen.
+     Liegt darunter, damit beim Laden keine fremde Fläche sichtbar wird. */
+  background: #807c79;
 }
 .hero-media img,
 .hero-media video{
@@ -323,6 +400,12 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   height: 100%;
   object-fit: cover;
 }
+/* Video startet unsichtbar und blendet auf, sobald wirklich Bild da ist */
+.hero-media video{
+  opacity: 0;
+  transition: opacity .7s ease;
+}
+.hero-media video.is-ready{ opacity: 1; }
 /* Foto-Variante bekommt zusätzlich den langsamen Hineinzoom */
 .hero-media img{
   transform: scale(1);
@@ -359,27 +442,11 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
+  align-items: center;
   margin-top: 12px;
 }
 
-.scroll-cue{
-  position: absolute;
-  right: 40px;
-  bottom: 44px;
-  z-index: 2;
-  width: 26px; height: 44px;
-  border: 1px solid rgba(0,0,0,.35);
-  border-radius: 20px;
-}
-.scroll-cue span{
-  position: absolute;
-  top: 8px; left: 50%;
-  width: 4px; height: 4px;
-  margin-left: -2px;
-  border-radius: 50%;
-  background: var(--black);
-  animation: scrollCue 1.8s infinite;
-}
+
 @keyframes scrollCue{
   0%{ opacity: 1; top: 8px; }
   70%{ opacity: 0; top: 24px; }
@@ -394,17 +461,40 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
 }
 .marquee-track{
   display: flex;
-  gap: 22px;
+  /* Kein gap: die Schleife springt um -50%, dafür müssen beide Hälften exakt
+     gleich breit sein. Ein Flex-gap wird zwischen den Hälften nur einmal
+     gezählt — genau daher kam die Lücke. Abstand steckt jetzt im padding. */
+  gap: 0;
   white-space: nowrap;
   width: max-content;
-  animation: marquee 26s linear infinite;
+  animation: marquee 34s linear infinite;
 }
 .marquee-track span{
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  padding: 0 13px;
+  font-family: 'Dancing Script', 'Brush Script MT', cursive;
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-transform: none;
   color: var(--white);
+  line-height: 1.25;
+}
+/* Schleife als weiße Linienzeichnung statt Emoji — dezenter und passt zum Stil */
+.marquee-track .mq-schleife{
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  color: rgba(255,255,255,.62);
+}
+.marquee-track .mq-schleife svg{
+  width: 17px;
+  height: 17px;
+}
+.marquee-track .mq-punkt{
+  color: rgba(255,255,255,.5);
+}
+@media (prefers-reduced-motion: reduce){
+  .marquee-track{ animation: none; }
 }
 @keyframes marquee{
   from{ transform: translateX(0); }
@@ -469,16 +559,37 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   border-radius: var(--radius);
   transition: var(--transition);
 }
+.ue-card{ box-shadow: var(--shadow-soft); }
 .ue-card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 16px 38px rgba(0,0,0,.09);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lift);
 }
+/* Charm sitzt in einem weichen Pastellkreis */
+.ue-card .ue-icon{
+  box-sizing: content-box;
+  padding: 11px;
+  border-radius: var(--radius-pill);
+  background: var(--blush-soft);
+}
+.ue-card--dark .ue-icon{ background: rgba(255,255,255,.55); }
+/* Charms: kleine Linien-Zeichen als Vorboten der Section */
+.ue-icon{
+  width: 26px;
+  height: 26px;
+  margin-bottom: 18px;
+  color: var(--black);
+  opacity: .75;
+  transition: var(--transition);
+}
+.ue-card:hover .ue-icon{ opacity: 1; transform: translateY(-2px); }
+.ue-card--dark .ue-icon{ color: var(--black); opacity: .8; }
+
 .ue-tag{
   font-size: 11px;
   letter-spacing: .28em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .ue-card h3{
   font-size: 20px;
@@ -499,15 +610,209 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   border-bottom: 1px solid currentColor;
 }
 
-/* Die letzte Karte ist der Abschluss — dunkel wie der Primär-Button */
+/* Die letzte Karte ist der Abschluss — Pastellrosa statt Grau.
+   Schrift bleibt dunkel, damit der Kontrast stimmt. */
 .ue-card--dark{
-  background: var(--black);
-  border-color: var(--black);
+  background: var(--blush);
+  border-color: var(--blush);
 }
-.ue-card--dark h3{ color: var(--white); }
-.ue-card--dark p,
-.ue-card--dark .ue-tag{ color: rgba(255,255,255,.62); }
-.ue-card--dark .ue-more{ color: var(--white); }
+.ue-card--dark h3{ color: var(--black); }
+.ue-card--dark p{ color: #54434b; }
+.ue-card--dark .ue-tag{ color: #5c4a52; }
+.ue-card--dark .ue-more{ color: var(--black); }
+
+/* ===== Galerie — seitlich scrollbar =====
+   scroll-snap sorgt dafür, dass die Bilder sauber einrasten. Die Bahn läuft
+   bewusst über die Containerbreite hinaus, damit rechts etwas angeschnitten
+   ist und sichtbar wird, dass es weitergeht. */
+.galerie{
+  padding: 100px 0;
+  background: var(--anthracite);
+  overflow: hidden;
+}
+.galerie-bahn{
+  display: flex;
+  gap: 20px;
+  padding: 8px max(32px, calc((100vw - var(--container)) / 2)) 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.galerie-bahn::-webkit-scrollbar{ display: none; }
+.galerie-bahn.is-dragging{
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+.galerie-bahn:focus-visible{ outline: 2px solid var(--stone); outline-offset: 4px; }
+
+.galerie-item{
+  flex: 0 0 auto;
+  width: clamp(230px, 27vw, 330px);
+  margin: 0;
+  scroll-snap-align: center;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+}
+.galerie-item img{
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+  filter: var(--tint);
+  transition: var(--transition);
+  pointer-events: none; /* sonst greift der Browser-Bilddrag */
+}
+.galerie-item:hover{ box-shadow: var(--shadow-lift); }
+.galerie-item:hover img{ filter: grayscale(0); }
+
+.galerie-steuerung{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+.galerie-pfeil{
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--anthracite-2);
+  color: var(--ink);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.galerie-pfeil svg{ width: 19px; height: 19px; }
+.galerie-pfeil:hover{
+  background: var(--blush-soft);
+  border-color: var(--blush);
+  transform: translateY(-2px);
+}
+.galerie-pfeil:disabled{ opacity: .3; pointer-events: none; }
+
+/* ===== Instagram-Cover ===== */
+.ig-cover{
+  padding: 104px 0;
+  background: var(--anthracite-2);
+}
+.ig-karte{
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 58px 40px 52px;
+  text-align: center;
+  background: var(--anthracite);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Story-Ring: zwei Kreise, der äußere im Pastellton */
+.ig-ring{
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 26px;
+  border-radius: var(--radius-pill);
+  background: var(--anthracite-2);
+  color: var(--ink);
+}
+.ig-ring::before{
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--blush);
+}
+.ig-ring::after{
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--blush);
+  animation: story-puls 3.2s ease-out infinite;
+}
+.ig-ring svg{ width: 34px; height: 34px; }
+
+/* Blüte sitzt angeschnitten in der oberen rechten Ecke */
+.ig-bluete{
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  width: 30px;
+  height: 30px;
+  color: var(--blush);
+}
+
+.ig-name{
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: clamp(38px, 5.4vw, 56px);
+  line-height: 1.05;
+  color: var(--black);
+  margin: 0 0 6px;
+}
+.ig-handle{
+  font-size: 12px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+.ig-text{
+  font-size: 15px;
+  color: var(--ink-soft);
+  max-width: 38ch;
+  margin: 0 auto 30px;
+}
+.ig-btn{ box-shadow: var(--shadow-soft); }
+
+@media (prefers-reduced-motion: reduce){
+  .ig-ring::after{ animation: none; }
+}
+
+@media (max-width: 600px){
+  .ig-karte{ padding: 46px 24px 42px; }
+  .ig-bluete{ top: 18px; right: 18px; width: 24px; height: 24px; }
+}
+
+/* ===== Spruch des Tages ===== */
+.spruch{
+  padding: 88px 0;
+  background: var(--anthracite-2);
+}
+.spruch-inner{
+  max-width: 680px;
+  text-align: center;
+}
+.spruch .eyebrow{ text-align: center; }
+.spruch-text{
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: clamp(24px, 3.4vw, 38px);
+  line-height: 1.32;
+  color: var(--black);
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+.spruch-text::before{ content: '„'; }
+.spruch-text::after{ content: '“'; }
+.spruch-datum{
+  font-size: 11.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
+}
 
 /* ===== Beauty — bewusst zurückgenommen ===== */
 .beauty{
@@ -520,6 +825,84 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   text-align: center;
 }
 .beauty .eyebrow{ text-align: center; }
+/* ===== 3D-Blume aus reinem CSS =====
+   Jedes Blütenblatt ist eine Fläche, die um die Mitte gedreht und nach
+   außen gekippt wird. preserve-3d hält sie im Raum, perspective gibt die
+   Tiefe. --auf (0…1) öffnet die Blüte, --dreh dreht sie — beides kommt
+   beim Scrollen aus script.js. */
+.blume{
+  width: 168px;
+  height: 168px;
+  margin: 0 auto 26px;
+  perspective: 620px;
+  --auf: 0;
+  --dreh: 0deg;
+}
+.blume__kern{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* Neigung nach hinten, dazu die Drehung um die eigene Achse */
+  transform: rotateX(calc(58deg - var(--auf) * 14deg)) rotateZ(var(--dreh));
+}
+
+.blatt{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 100%;
+  /* Blütenblattform: oben rund, unten spitz zulaufend */
+  border-radius: 54% 54% 42% 42% / 68% 68% 32% 32%;
+  background: linear-gradient(170deg, #fff 2%, var(--blush-soft) 38%, var(--blush) 100%);
+  box-shadow: 0 6px 16px rgba(120, 70, 100, .1);
+}
+
+/* Äußerer Kranz: acht Blätter, alle 45 Grad eines */
+.blatt--aussen{
+  width: 42px;
+  height: 74px;
+  margin: -74px 0 0 -21px;
+  transform:
+    rotateZ(calc(var(--i) * 45deg))
+    rotateX(calc(18deg + var(--auf) * 34deg))
+    translateZ(2px);
+  opacity: calc(.55 + var(--auf) * .42);
+}
+
+/* Innerer Kranz: fünf kleinere, versetzt und steiler gestellt */
+.blatt--innen{
+  width: 28px;
+  height: 46px;
+  margin: -46px 0 0 -14px;
+  transform:
+    rotateZ(calc(22deg + var(--i) * 72deg))
+    rotateX(calc(8deg + var(--auf) * 20deg))
+    translateZ(9px);
+  background: linear-gradient(170deg, #fff 6%, var(--blush-soft) 62%);
+  opacity: calc(.6 + var(--auf) * .4);
+}
+
+.blume__mitte{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #fff, var(--blush) 78%);
+  transform: translateZ(15px);
+  box-shadow: 0 2px 8px rgba(120, 70, 100, .18);
+}
+
+@media (max-width: 600px){
+  .blume{ width: 128px; height: 128px; }
+}
+/* Ohne Bewegung: offene Blüte, keine Drehung */
+@media (prefers-reduced-motion: reduce){
+  .blume{ --auf: 1; --dreh: 0deg; }
+}
 .beauty-line{
   font-family: var(--font-italic);
   font-style: italic;
@@ -564,13 +947,62 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   background: var(--anthracite-2);
   aspect-ratio: 9/16;
 }
+/* Videos ohne den rosa Duotone: nur leicht zurückgenommen, damit die
+   echten Haarfarben sichtbar bleiben — darauf liegt das Glitzern. */
 .work-video video{
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  filter: saturate(.86) contrast(1.04) brightness(1.02);
   transition: filter .6s ease, transform .8s ease;
 }
-.work-video:hover video{ filter: grayscale(0); transform: scale(1.03); }
+.work-video:hover video{ filter: none; transform: scale(1.03); }
+
+/* ===== Glitzer =====
+   Zwei Lagen gestreuter Lichtpunkte, unterschiedlich groß und versetzt
+   getaktet. mix-blend-mode: screen heißt: die Punkte hellen nur auf,
+   sie legen keinen grauen Schleier über das Bild. */
+.work-video::before,
+.work-video::after{
+  content: '';
+  position: absolute;
+  inset: -12%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+/* Feiner Staub */
+.work-video::before{
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.95) 0 1px, transparent 1.7px),
+    radial-gradient(circle, rgba(255,245,252,.75) 0 1px, transparent 1.4px);
+  background-size: 140px 140px, 97px 97px;
+  background-position: 0 0, 46px 63px;
+  animation: glitz-fein 3.1s ease-in-out infinite;
+}
+/* Größere Funken, langsamer und seltener */
+.work-video::after{
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,1) 0 1.6px, transparent 3px),
+    radial-gradient(circle, rgba(255,250,255,.85) 0 1.2px, transparent 2.4px);
+  background-size: 230px 230px, 310px 310px;
+  background-position: 70px 20px, 190px 150px;
+  animation: glitz-grob 4.7s ease-in-out infinite;
+  animation-delay: -1.6s;
+}
+
+@keyframes glitz-fein{
+  0%, 100% { opacity: .18; transform: translate3d(0, 0, 0) }
+  50%      { opacity: .62; transform: translate3d(-6px, -9px, 0) }
+}
+@keyframes glitz-grob{
+  0%, 100% { opacity: .5;  transform: translate3d(0, 0, 0) scale(1) }
+  40%      { opacity: .08; transform: translate3d(8px, 6px, 0) scale(1.04) }
+  70%      { opacity: .7;  transform: translate3d(3px, -5px, 0) scale(1.01) }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .work-video::before, .work-video::after{ animation: none; opacity: .3; }
+}
 .work-video figcaption{
   position: absolute;
   left: 18px; bottom: 16px;
@@ -581,43 +1013,75 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   text-shadow: 0 1px 6px rgba(0,0,0,.6);
 }
 
-/* Vorher / Nachher */
+/* Vorher / Nachher als Überblendung =====================================
+   Das Bild bleibt stehen (sticky), der Text scrollt daneben. --b kommt
+   aus script.js und blendet Vorher auf Nachher — Bild UND Beschriftung
+   wechseln gemeinsam. Hier trägt der Effekt die Aussage, deshalb steht
+   er an dieser Stelle und nicht irgendwo als Deko. */
 .ba-block{
   display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 60px;
-  align-items: center;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
   margin-bottom: 100px;
+  --b: 0;
 }
-.ba-copy h3{ font-size: clamp(24px, 3vw, 34px); }
-.ba-pair{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+.ba-sticky{
+  position: sticky;
+  top: 15vh;
 }
-.ba-item{
-  margin: 0;
+.ba-stapel{
   position: relative;
-  overflow: hidden;
+  margin: 0;
   aspect-ratio: 3/4;
+  border-radius: var(--radius);
+  overflow: hidden;
   background: var(--anthracite-2);
+  box-shadow: var(--shadow-soft);
 }
-.ba-item img{
+.ba-stapel img{
+  position: absolute;
+  inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
-  transition: transform .7s ease, filter .5s ease;
+  border-radius: inherit;
+  filter: var(--tint);
 }
-.ba-item:hover img{ filter: grayscale(0); transform: scale(1.04); }
-.ba-item figcaption{
+.ba-vorher { opacity: calc(1 - var(--b)); }
+.ba-nachher{ opacity: var(--b); }
+
+/* Die Beschriftung wechselt mit — der „Text, der switcht“ */
+.ba-label{
   position: absolute;
-  left: 0; bottom: 0;
-  padding: 10px 16px;
+  left: 18px; bottom: 18px;
+  height: 1.6em;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--white);
   font-size: 11px;
-  letter-spacing: .2em;
+  letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--black);
-  background: var(--white);
+}
+.ba-label span{
+  position: absolute;
+  left: 18px; top: 9px;
+  white-space: nowrap;
+}
+.ba-label__a{ opacity: calc(1 - var(--b)); }
+.ba-label__b{ opacity: var(--b); }
+
+/* Der Text braucht Höhe, sonst hat das stehende Bild keinen Weg */
+.ba-copy{ padding-block: 8vh 46vh; }
+.ba-copy h3{ font-size: clamp(24px, 3vw, 34px); }
+.ba-copy p{ margin-bottom: 46vh; }
+.ba-copy p:last-child{ margin-bottom: 0; }
+
+@media (max-width: 900px){
+  .ba-block{ grid-template-columns: 1fr; gap: 32px; }
+  .ba-sticky{ position: static; }
+  .ba-copy{ padding-block: 0; }
+  .ba-copy p{ margin-bottom: 1em; }
 }
 
 .work-grid{
@@ -634,7 +1098,7 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
 .work-item img{
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  filter: var(--tint);
   transition: transform .7s ease, filter .5s ease;
 }
 .work-item:hover img{ transform: scale(1.06); filter: grayscale(0); }
@@ -655,12 +1119,19 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  filter: var(--tint);
   display: block;
 }
 /* Fotowand-Video bleibt farbig — matt und pastellig statt Schwarz-Weiß */
 .salon-media video{
   filter: saturate(.68) contrast(.9) brightness(1.09) sepia(.07);
+}
+/* Wartebereich als zweites Motiv unter dem Video — die Pflanzenwand
+   behält etwas Farbe, sonst geht das Grün verloren */
+.salon-still{ margin: 18px 0 0; }
+.salon-media .salon-still img{
+  aspect-ratio: 5/4;
+  filter: saturate(.72) contrast(.95) brightness(1.04);
 }
 .salon-copy h2{ font-size: clamp(28px, 3.6vw, 40px); }
 
@@ -670,6 +1141,16 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   background: var(--anthracite);
 }
 .leistungen h2{ font-size: clamp(28px, 3.6vw, 40px); margin-bottom: 8px; }
+
+/* Gruppentitel über den Preisblöcken — im Grau vom Salonschild */
+.price-group{
+  font-size: 12px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin: 54px 0 14px;
+}
+.price-group:first-of-type{ margin-top: 0; }
 
 .price-list{
   border-top: 1px solid var(--line);
@@ -732,7 +1213,7 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   width: 100%;
   aspect-ratio: 3/4;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  filter: var(--tint);
   transition: transform .7s ease, filter .5s ease;
 }
 .herren-img:hover img{ filter: grayscale(0); transform: scale(1.04); }
@@ -784,7 +1265,7 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   width: 100%;
   aspect-ratio: 3/4;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  filter: var(--tint);
   transition: transform .7s ease, filter .5s ease;
 }
 .braut-img:hover img{ filter: grayscale(0); transform: scale(1.04); }
@@ -850,7 +1331,7 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   width: 100%;
   aspect-ratio: 3/4;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  filter: var(--tint);
   transition: transform .7s ease, filter .5s ease;
 }
 .coiffeurin-img:hover img{ filter: grayscale(0); transform: scale(1.04); }
@@ -1070,7 +1551,7 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
 .ig-item img{
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  filter: var(--tint);
   transition: var(--transition);
 }
 .ig-icon{
@@ -1162,7 +1643,6 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
 
 /* Bildflächen, Videos, Karten */
 .work-video,
-.ba-item,
 .work-item,
 .herren-img,
 .braut-img,
@@ -1181,7 +1661,6 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
 
 /* Bilder in bereits abgerundeten Containern */
 .work-video video,
-.ba-item img,
 .work-item img,
 .herren-img img,
 .braut-img img,
@@ -1190,14 +1669,28 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   border-radius: inherit;
 }
 
-/* Buttons und Formularfelder etwas dezenter */
-.btn{ border-radius: var(--radius-sm); }
+/* Buttons vollständig gerundet — trägt den weicheren Look */
+.btn{ border-radius: var(--radius-pill); }
+.btn-primary{ box-shadow: var(--shadow-soft); }
+.btn-primary:hover{ box-shadow: var(--shadow-lift); }
+
+/* Bildflächen bekommen einen weichen Schatten statt harter Kante */
+.work-video,
+.work-item,
+.herren-img,
+.braut-img,
+.coiffeurin-img,
+.salon-media img,
+.salon-media video,
+.anfahrt-card,
+.contact-form{
+  box-shadow: var(--shadow-soft);
+}
 .form-row input,
 .form-row select,
 .form-row textarea{ border-radius: var(--radius-sm); }
 
 /* Vorher/Nachher-Label an die Rundung anpassen */
-.ba-item figcaption{ border-radius: 0 var(--radius-sm) 0 var(--radius); }
 
 /* Ghost-Button behält seine Unterstreichung ohne Rundung */
 .btn-ghost{ border-radius: 0; }
@@ -1211,6 +1704,8 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
     gap: 46px;
   }
   .work-videos, .work-grid, .anfahrt-grid, .legal-grid{ grid-template-columns: repeat(2, 1fr); }
+  /* 2×2 statt 3+1 — sonst steht die letzte Karte allein in der Reihe */
+  .ueberblick-grid{ grid-template-columns: repeat(2, 1fr); }
   .instagram-grid{ grid-template-columns: repeat(3, 1fr); }
   .bg-portrait{ width: 60vw; height: 50vh; opacity: .5; }
 }
@@ -1219,12 +1714,11 @@ body.focus-rollers .bg-portrait--tl{ opacity: .85; }
   .container{ padding: 0 20px; }
   .hero-content{ padding-bottom: 80px; }
   .work-videos, .work-grid, .anfahrt-grid, .legal-grid{ grid-template-columns: 1fr; }
+  .ueberblick-grid{ grid-template-columns: 1fr; }
   .instagram-grid{ grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .contact-form{ padding: 30px 22px; }
   .price-row{ flex-direction: column; gap: 8px; }
   .footer-bottom{ flex-direction: column; gap: 6px; }
-  .scroll-cue{ display: none; }
-}
-
+  
 /* Footer bleibt dunkel */
 .site-footer .logo{ color: var(--white); }

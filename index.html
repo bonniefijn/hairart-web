@@ -10,9 +10,9 @@
 <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/lenis.css">
-<link rel="stylesheet" href="assets/css/style.css?v=16">
+<link rel="stylesheet" href="assets/css/style.css?v=37">
 </head>
 <body>
 
@@ -28,6 +28,32 @@
   <img src="assets/images/hero/portrait-rollers.jpg" alt="">
 </div>
 
+<!-- Ornamentale Ranke am linken Rand: zeichnet sich beim Runterscrollen Stück für
+     Stück selbst. Jeder Pfad hat pathLength="1", die Steuerung läuft über
+     stroke-dashoffset in script.js. -->
+<div class="ranke" id="ranke" aria-hidden="true">
+  <svg viewBox="0 0 220 900" fill="none" stroke="currentColor" stroke-width="1.7"
+       stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMax meet">
+    <!-- Stängel, von unten nach oben -->
+    <path pathLength="1" d="M112 900C70 782 152 704 104 604S44 436 118 338 128 214 110 152"/>
+    <!-- Blätter, abwechselnd links und rechts -->
+    <path pathLength="1" d="M106 742c-38-6-62-40-50-72 36 4 58 38 50 72Z"/>
+    <path pathLength="1" d="M104 604c38-8 60-44 46-76-36 8-54 44-46 76Z"/>
+    <path pathLength="1" d="M88 486c-38-4-64-36-54-70 36 2 60 36 54 70Z"/>
+    <path pathLength="1" d="M112 372c38-10 58-48 42-78-35 11-51 48-42 78Z"/>
+    <!-- Blüte oben: fünf Blütenblätter um eine Mitte -->
+    <path pathLength="1" d="M110 152c-13-9-17-27-8-40s27-16 40-7 16 27 7 40-26 16-39 7Z"/>
+    <path pathLength="1" d="M110 106c0-17 13-31 30-31s30 14 30 31-13 30-30 30"/>
+    <path pathLength="1" d="M110 106c0-17-13-31-30-31s-30 14-30 31 13 30 30 30"/>
+    <path pathLength="1" d="M110 106c14-10 33-6 43 8"/>
+    <path pathLength="1" d="M110 106c-14-10-33-6-43 8"/>
+    <path pathLength="1" d="M96 92a14 14 0 1 0 28 0 14 14 0 1 0-28 0Z"/>
+    <!-- Zwei kleine Knospen -->
+    <path pathLength="1" d="M118 338c16-6 30 4 32 20-16 6-29-4-32-20Z"/>
+    <path pathLength="1" d="M104 604c-16-8-31 0-35 16 16 8 30 0 35-16Z"/>
+  </svg>
+</div>
+
 <!-- Logo-Badge: fixiertes Standbild im Hero, verblasst beim Runterscrollen -->
 <div class="logo-watermark" id="logoWatermark" aria-hidden="true">
   <img src="assets/images/badge/logo-badge.png" alt="">
@@ -39,6 +65,15 @@
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M6.6 3h3.2l1.6 4-2 1.3a12 12 0 0 0 5.3 5.3l1.3-2 4 1.6v3.2a1.6 1.6 0 0 1-1.7 1.6A16.4 16.4 0 0 1 5 4.7 1.6 1.6 0 0 1 6.6 3Z"
             fill="currentColor"/>
+    </svg>
+  </a>
+  <a href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener"
+     class="qc-btn qc-ig" aria-label="Instagram von The Hair Art's öffnen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5.2"/>
+      <circle cx="12" cy="12" r="4.1"/>
+      <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/>
     </svg>
   </a>
   <a href="https://wa.me/491779718633" target="_blank" rel="noopener" class="qc-btn qc-wa" aria-label="Über WhatsApp schreiben">
@@ -88,36 +123,117 @@
 </header>
 
 <!-- ===== 1 · HERO ===== -->
-<section class="hero" id="home" data-focus="both">
+<section class="hero" id="home" data-focus="both" data-logo="da">
   <div class="hero-media" aria-hidden="true">
-    <video src="assets/videos/interior.mp4" autoplay muted loop playsinline preload="metadata" poster="assets/images/hero/interieur.jpg"></video>
+    <!-- Kein poster: das alte Standbild zeigte einen fremden Salon und blitzte
+         vor dem Video auf. Stattdessen liegt der Durchschnittston des Videos
+         als Fläche darunter, und das Video blendet sich ein, sobald es läuft. -->
+    <video id="heroVideo" src="assets/videos/interior.mp4" autoplay muted loop playsinline preload="auto"></video>
   </div>
   <div class="hero-overlay"></div>
   <div class="container hero-content">
+    <!-- Beide Links in derselben Form: nur Text mit Unterstrich, kein Mischmasch -->
     <div class="hero-actions reveal">
-      <a href="#termin" class="btn btn-primary">Termin anfragen</a>
-      <a href="#work" class="btn btn-ghost">Galerie ansehen</a>
-    </div>
+      <a href="#termin" class="btn btn-ghost btn-ghost--stark">Termin anfragen</a>
+      <a href="#work" class="btn btn-ghost">Galerie ansehen</a>    </div>
   </div>
-  <a href="#work" class="scroll-cue" aria-label="Nach unten scrollen"><span></span></a>
 </section>
 
 <!-- ===== MARQUEE ===== -->
 <section class="marquee">
+  <!-- Zwei zeichengleiche Hälften: die Animation springt um -50%.
+       Für eine Aktion einfach die Wörter hier austauschen — in BEIDEN Hälften. -->
   <div class="marquee-track">
-    <span>Balayage</span><span>·</span><span>Money Piece</span><span>·</span>
-    <span>Foilyage</span><span>·</span><span>Color Melting</span><span>·</span>
-    <span>Blonding</span><span>·</span><span>Balayage</span><span>·</span>
-    <span>Money Piece</span><span>·</span><span>Foilyage</span><span>·</span>
-    <span>Color Melting</span><span>·</span><span>Blonding</span><span>·</span>
+      <span>Balayage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Money Piece</span>
+      <span class="mq-punkt">·</span>
+      <span>Foilyage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Color Melting</span>
+      <span class="mq-punkt">·</span>
+      <span>Blonding</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Babylights</span>
+      <span class="mq-punkt">·</span>
+      <span>Balayage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Money Piece</span>
+      <span class="mq-punkt">·</span>
+      <span>Foilyage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Color Melting</span>
+      <span class="mq-punkt">·</span>
+      <span>Blonding</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Babylights</span>
+      <span class="mq-punkt">·</span>
+      <span>Balayage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Money Piece</span>
+      <span class="mq-punkt">·</span>
+      <span>Foilyage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Color Melting</span>
+      <span class="mq-punkt">·</span>
+      <span>Blonding</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Babylights</span>
+      <span class="mq-punkt">·</span>
+      <!-- Hälfte 2 -->
+      <span>Balayage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Money Piece</span>
+      <span class="mq-punkt">·</span>
+      <span>Foilyage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Color Melting</span>
+      <span class="mq-punkt">·</span>
+      <span>Blonding</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Babylights</span>
+      <span class="mq-punkt">·</span>
+      <span>Balayage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Money Piece</span>
+      <span class="mq-punkt">·</span>
+      <span>Foilyage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Color Melting</span>
+      <span class="mq-punkt">·</span>
+      <span>Blonding</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Babylights</span>
+      <span class="mq-punkt">·</span>
+      <span>Balayage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Money Piece</span>
+      <span class="mq-punkt">·</span>
+      <span>Foilyage</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Color Melting</span>
+      <span class="mq-punkt">·</span>
+      <span>Blonding</span>
+      <span class="mq-schleife"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12C9.4 8.6 4 8 4 10.8S9.4 15.4 12 12Z"/><path d="M12 12c2.6-3.4 8-4 8-1.2S14.6 15.4 12 12Z"/><circle cx="12" cy="12" r="1.4"/><path d="M10.7 13.2 8.6 17.4M13.3 13.2l2.1 4.2"/></svg></span>
+      <span>Babylights</span>
+      <span class="mq-punkt">·</span>
   </div>
 </section>
 
 <!-- ===== ÜBERBLICK — anklickbare Einstiege, führen zu den Sections ===== -->
-<section class="ueberblick">
+<!-- data-logo steuert das Wasserzeichen: "weg" schiebt es nach hinten, "da" holt es zurück -->
+<section class="ueberblick" data-logo="weg">
   <div class="container ueberblick-grid">
 
     <a href="#leistungen" class="ue-card reveal">
+      <!-- Charm: Schere über einer Welle — Schnitt und Farbverlauf -->
+      <svg class="ue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="4.6" cy="5.4" r="1.9"/>
+        <circle cx="4.6" cy="13.4" r="1.9"/>
+        <path d="M18.5 3.6 6.3 12.4M18.5 15.2 6.3 6.4"/>
+        <path d="M2.5 21c1.7-1.7 3.4-1.7 5.1 0s3.4 1.7 5.1 0 3.4-1.7 5.1 0"/>
+      </svg>
       <span class="ue-tag">Leistungen</span>
       <h3>Balayage &amp; Farbe</h3>
       <p>Handgemalte Strähnen, Foilyage, Blondierung — mit Richtpreisen.</p>
@@ -125,6 +241,13 @@
     </a>
 
     <a href="#herren" class="ue-card reveal" data-preselect="Herrenschnitt">
+      <!-- Charm: Mars-Zeichen -->
+      <svg class="ue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="9.5" cy="14.5" r="5.4"/>
+        <path d="M13.4 10.6 20.4 3.6"/>
+        <path d="M15.2 3.4h5.4v5.4"/>
+      </svg>
       <span class="ue-tag">Für ihn</span>
       <h3>Herren &amp; Jungs</h3>
       <p>Schnitt, Bart und Übergänge — spezialisiert auf Locken.</p>
@@ -132,6 +255,15 @@
     </a>
 
     <a href="#braut" class="ue-card reveal" data-preselect="Brautfrisur">
+      <!-- Charm: Blütenzweig, wie der Haarschmuck auf dem Bild -->
+      <svg class="ue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 21.5v-9.2"/>
+        <circle cx="12" cy="5" r="2.2"/>
+        <circle cx="7.2" cy="9.5" r="1.8"/>
+        <circle cx="16.8" cy="9.5" r="1.8"/>
+        <path d="M12 12.3 8.6 10.6M12 12.3l3.4-1.7M12 9.8V7.2"/>
+      </svg>
       <span class="ue-tag">Für den großen Tag</span>
       <h3>Brautfrisuren</h3>
       <p>Mit Probetermin, abgestimmt auf Kleid und Schleier.</p>
@@ -139,6 +271,13 @@
     </a>
 
     <a href="#termin" class="ue-card ue-card--dark reveal">
+      <!-- Charm: Kalender mit Haken -->
+      <svg class="ue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="16" rx="3"/>
+        <path d="M8 3v4M16 3v4M3 11h18"/>
+        <path d="m9.4 15.6 2 2 3.4-3.4"/>
+      </svg>
       <span class="ue-tag">Termin</span>
       <h3>Direkt anfragen</h3>
       <p>Über WhatsApp, Instagram oder E-Mail — ganz wie es dir lieber ist.</p>
@@ -148,8 +287,10 @@
   </div>
 </section>
 
+
+
 <!-- ===== 2 · WORK — Videos + Vorher/Nachher editorial ===== -->
-<section class="work" id="work">
+<section class="work" id="work" data-logo="leise">
   <div class="container">
     <p class="eyebrow center reveal">Arbeiten aus dem Studio</p>
     <h2 class="center reveal">Farbe, die mitwächst</h2>
@@ -172,31 +313,37 @@
     </figure>
   </div>
 
-  <!-- Vorher / Nachher -->
-  <div class="container ba-block">
-    <div class="ba-copy reveal">
-      <p class="eyebrow">Der Unterschied</p>
-      <h3>Vorher &amp; Nachher</h3>
-      <p>Der schönste Moment ist der Blick in den Spiegel am Ende. Mehr Volumen, weichere Übergänge und eine Farbe, die zum Gesicht passt statt gegen es zu arbeiten.</p>
-      <p>Und weil kein harter Ansatz entsteht, sieht der Look auch nach Wochen noch gut aus.</p>
+  <!-- Vorher / Nachher als Überblendung: das Bild bleibt stehen, der Text
+       scrollt daneben, und beim Scrollen wird aus Vorher Nachher. Hier ist
+       die Überblendung selbst die Aussage — dieselbe Person, ein Termin. -->
+  <div class="container ba-block" data-blende="0.26 0.36">
+    <div class="ba-sticky">
+      <figure class="ba-stapel" data-schicht>
+        <img class="ba-vorher"  src="assets/images/work/vorher.jpg"  alt="Haare vor dem Termin" loading="lazy">
+        <img class="ba-nachher" src="assets/images/work/nachher.jpg" alt="Dieselben Haare nach Schnitt und Farbe" loading="lazy">
+        <figcaption class="ba-label">
+          <span class="ba-label__a">Vorher</span>
+          <span class="ba-label__b">Nachher</span>
+        </figcaption>
+      </figure>
     </div>
-    <div class="ba-pair reveal">
-      <figure class="ba-item">
-        <img src="assets/images/work/vorher.jpg" alt="Vorher" loading="lazy">
-        <figcaption>Vorher</figcaption>
-      </figure>
-      <figure class="ba-item">
-        <img src="assets/images/work/nachher.jpg" alt="Nachher" loading="lazy">
-        <figcaption>Nachher</figcaption>
-      </figure>
+
+    <div class="ba-copy">
+      <p class="eyebrow reveal">Der Unterschied</p>
+      <h3 class="reveal">Einmal hinsehen</h3>
+      <p class="reveal">Der schönste Moment ist der Blick in den Spiegel am Ende. Mehr Volumen,
+        weichere Übergänge und eine Farbe, die zum Gesicht passt statt gegen es zu arbeiten.</p>
+      <p class="reveal">Und weil kein harter Ansatz entsteht, sieht der Look auch nach Wochen
+        noch gut aus — das ist der eigentliche Unterschied.</p>
+      <p class="reveal">Links dieselbe Person, ein Termin dazwischen. Scroll weiter und sieh selbst.</p>
     </div>
   </div>
 
   <!-- Weitere Arbeiten -->
   <div class="container work-grid">
-    <figure class="work-item reveal"><img src="assets/images/work/classic.png" alt="Klassische Balayage in warmem Blond" loading="lazy"></figure>
-    <figure class="work-item reveal"><img src="assets/images/work/brunette.png" alt="Brünette Farbe mit weichen Übergängen" loading="lazy"></figure>
-    <figure class="work-item reveal"><img src="assets/images/work/shortbob.png" alt="Kurzer Bob mit Volumen" loading="lazy"></figure>
+    <figure class="work-item reveal"><img src="assets/images/work/classic.jpg" alt="Klassische Balayage in warmem Blond" loading="lazy"></figure>
+    <figure class="work-item reveal"><img src="assets/images/work/brunette.jpg" alt="Brünette Farbe mit weichen Übergängen" loading="lazy"></figure>
+    <figure class="work-item reveal"><img src="assets/images/work/shortbob.jpg" alt="Kurzer Bob mit Volumen" loading="lazy"></figure>
   </div>
 </section>
 
@@ -204,11 +351,15 @@
 <section class="reveal-gap" data-focus="marilyn" aria-hidden="true"></section>
 
 <!-- ===== 3 · ÜBER DEN SALON ===== -->
-<section class="salon" id="salon">
+<section class="salon" id="salon" data-logo="weg">
   <div class="container salon-grid">
     <div class="salon-media reveal">
       <video src="assets/videos/fotowand.mp4" muted loop playsinline preload="none"
              aria-label="Blick in das Studio von The Hair Art's"></video>
+      <figure class="salon-still">
+        <img src="assets/images/salon/wartebereich.jpg"
+             alt="Wartebereich mit begrünter Pflanzenwand und Lichterkette" loading="lazy">
+      </figure>
     </div>
     <div class="salon-copy reveal">
       <p class="eyebrow">Das Studio</p>
@@ -226,6 +377,64 @@
   </div>
 </section>
 
+<!-- ===== GALERIE — seitlich scrollbar, mit Ziehen bedienbar ===== -->
+<section class="galerie" id="galerie">
+  <div class="container">
+    <p class="eyebrow center reveal">Galerie</p>
+    <h2 class="center reveal">Ein Blick ins Studio</h2>
+    <p class="section-sub center reveal">Zum Blättern wischen oder mit der Maus ziehen.</p>
+  </div>
+
+  <div class="galerie-bahn" id="galerieBahn" role="region" aria-label="Bildergalerie, seitlich scrollbar" tabindex="0">
+    <figure class="galerie-item">
+      <img src="assets/images/salon/wartebereich.jpg" alt="Wartebereich mit Pflanzenwand" loading="lazy">
+    </figure>
+    <figure class="galerie-item">
+      <img src="assets/images/work/classic.jpg" alt="Klassische Balayage in warmem Blond" loading="lazy">
+    </figure>
+    <figure class="galerie-item">
+      <img src="assets/images/braut/braut-01.jpg" alt="Halboffene Brautfrisur mit Blütenhaarschmuck" loading="lazy">
+    </figure>
+    <figure class="galerie-item">
+      <img src="assets/images/work/brunette.jpg" alt="Brünette Farbe mit weichen Übergängen" loading="lazy">
+    </figure>
+    <figure class="galerie-item">
+      <img src="assets/images/herren/locken-01.jpg" alt="Lockenschnitt für Herren" loading="lazy">
+    </figure>
+    <figure class="galerie-item">
+      <img src="assets/images/work/shortbob.jpg" alt="Kurzer Bob mit Volumen" loading="lazy">
+    </figure>
+    <figure class="galerie-item">
+      <img src="assets/images/braut/braut-03.jpg" alt="Tief sitzender Dutt mit Perlennadeln" loading="lazy">
+    </figure>
+    <figure class="galerie-item">
+      <img src="assets/images/herren/locken-02.jpg" alt="Definierte Locken nach dem Trockenschnitt" loading="lazy">
+    </figure>
+  </div>
+
+  <div class="container galerie-steuerung">
+    <button class="galerie-pfeil" id="galerieZurueck" aria-label="Vorherige Bilder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+    </button>
+    <button class="galerie-pfeil" id="galerieVor" aria-label="Nächste Bilder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ===== SPRUCH DES TAGES =====
+     Der Text kommt aus SPRUECHE in script.js. Ausgewählt wird nach Tag im Jahr,
+     also sehen alle Besucherinnen am selben Tag denselben Spruch. -->
+<section class="spruch" id="spruch" hidden>
+  <div class="container spruch-inner">
+    <p class="eyebrow">Heute im Salon</p>
+    <blockquote class="spruch-text" id="spruchText"></blockquote>
+    <p class="spruch-datum" id="spruchDatum"></p>
+  </div>
+</section>
+
 <!-- ===== 4 · LEISTUNGEN & PREISE ===== -->
 <section class="leistungen" id="leistungen">
   <div class="container">
@@ -233,50 +442,137 @@
     <h2 class="center reveal">Was wir machen</h2>
     <p class="section-sub center reveal">Die Preise sind Richtwerte — was es wirklich kostet, hängt von Haarlänge und Aufwand ab. Das besprechen wir vorher, damit es keine Überraschung gibt.</p>
 
-    <!-- TODO: Preise mit der Inhaberin abgleichen und anpassen -->
+    <!-- Preise 1:1 vom Aushang im Salon übernommen (Foto vom 03.09.2026).
+         Ausnahme: Herren- und Kinderschnitt stehen nicht auf dem Aushang —
+         die beiden Zeilen sind noch mit Elif abzugleichen. -->
+
+    <p class="price-group reveal">Schnitt &amp; Styling</p>
     <div class="price-list">
       <div class="price-row reveal">
         <div class="price-info">
-          <h3>Balayage</h3>
-          <p>Von Hand gemalte Strähnen für weiche, sonnige Übergänge — wächst ohne harte Kante heraus.</p>
+          <h3>Haarschnitt</h3>
+          <p>Waschen, Schneiden, Föhnen — mit einer Form, die auch zu Hause hält.</p>
         </div>
-        <span class="price-tag">ab 165 €</span>
+        <span class="price-tag">ab 50 €</span>
       </div>
       <div class="price-row reveal">
         <div class="price-info">
-          <h3>Foilyage</h3>
-          <p>Balayage kombiniert mit Folien. Für alle, die es heller und kontrastreicher mögen.</p>
+          <h3>Föhnen</h3>
+          <p>Waschen und in Form föhnen, für zwischendurch oder vor dem Abend.</p>
         </div>
-        <span class="price-tag">ab 145 €</span>
+        <span class="price-tag">ab 30 €</span>
       </div>
       <div class="price-row reveal">
         <div class="price-info">
-          <h3>Money Piece</h3>
-          <p>Gezielt aufgehellte Strähnen rund ums Gesicht. Kleiner Eingriff, große Wirkung.</p>
+          <h3>American Blow Dry</h3>
+          <p>Voluminöses Föhnstyling mit weichen, großen Wellen.</p>
         </div>
-        <span class="price-tag">ab 75 €</span>
+        <span class="price-tag">ab 120 €</span>
       </div>
       <div class="price-row reveal">
         <div class="price-info">
-          <h3>Blondierung</h3>
-          <p>Vollflächige Aufhellung — in Etappen, wenn das Haar es braucht. Gesundheit geht vor Geschwindigkeit.</p>
+          <h3>Brazilian Blow Dry</h3>
+          <p>Glättende Behandlung, die Frizz nimmt und den Föhnaufwand verkürzt.</p>
         </div>
-        <span class="price-tag">ab 190 €</span>
+        <span class="price-tag">ab 120 €</span>
       </div>
       <div class="price-row reveal">
         <div class="price-info">
-          <h3>Gloss &amp; Pflege</h3>
-          <p>Frischt Nuance und Glanz zwischen zwei Farbterminen auf. Ideal alle sechs bis acht Wochen.</p>
+          <h3>Dauerwelle</h3>
+          <p>Dauerhafte Locken oder Wellen, abgestimmt auf die Haarstruktur.</p>
+        </div>
+        <span class="price-tag">ab 100 €</span>
+      </div>
+    </div>
+
+    <p class="price-group reveal">Farbe</p>
+    <div class="price-list">
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Ombré, Sombré &amp; Balayage</h3>
+          <p>Von Hand gesetzte Übergänge — wachsen ohne harte Kante heraus.</p>
+        </div>
+        <span class="price-tag">ab 120 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Babylights &amp; Brushlights</h3>
+          <p>Feinste Strähnen für einen natürlich gewachsenen Aufhellungseffekt.</p>
+        </div>
+        <span class="price-tag">ab 150 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Highlights</h3>
+          <p>Gezielt gesetzte helle Strähnen für mehr Tiefe und Bewegung.</p>
+        </div>
+        <span class="price-tag">ab 100 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Farbwechsel</h3>
+          <p>Neue Farbe auf ganzer Länge — mit Beratung, was das Haar mitmacht.</p>
+        </div>
+        <span class="price-tag">ab 120 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Ansatzfarbe</h3>
+          <p>Nur der nachgewachsene Ansatz, damit die Farbe geschlossen bleibt.</p>
         </div>
         <span class="price-tag">ab 55 €</span>
       </div>
       <div class="price-row reveal">
         <div class="price-info">
-          <h3>Schnitt &amp; Styling</h3>
-          <p>Waschen, Schneiden, Föhnen — mit Fokus auf Volumen und eine Form, die auch zu Hause hält.</p>
+          <h3>Tönung</h3>
+          <p>Frischt Nuance und Glanz zwischen zwei Farbterminen auf.</p>
         </div>
-        <span class="price-tag">ab 65 €</span>
+        <span class="price-tag">ab 70 €</span>
       </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Pigmentierung</h3>
+          <p>Bringt Farbpigmente zurück, wenn das Haar sie verloren hat.</p>
+        </div>
+        <span class="price-tag">ab 70 €</span>
+      </div>
+    </div>
+
+    <p class="price-group reveal">Pflege</p>
+    <div class="price-list">
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Hair Botox</h3>
+          <p>Aufbauende Intensivkur — legt sich um die Haarfaser und glättet sie sichtbar.</p>
+        </div>
+        <span class="price-tag">80 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Keratin-Pflege</h3>
+          <p>Füllt die Struktur mit Keratin auf, für Glanz und weniger Bruch.</p>
+        </div>
+        <span class="price-tag">ab 80 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Olaplex</h3>
+          <p>Verbindet gebrochene Bindungen im Haar neu — vor allem nach Aufhellungen.</p>
+        </div>
+        <span class="price-tag">ab 45 €</span>
+      </div>
+      <div class="price-row reveal">
+        <div class="price-info">
+          <h3>Micro Welding</h3>
+          <p>Extensions, die einzeln und ohne Hitze eingearbeitet werden.</p>
+        </div>
+        <!-- Preis steht auf keinem der beiden Aushänge — mit Elif klären -->
+        <span class="price-tag">auf Anfrage</span>
+      </div>
+    </div>
+
+    <p class="price-group reveal">Herren &amp; Kinder</p>
+    <div class="price-list">
       <div class="price-row reveal">
         <div class="price-info">
           <h3>Herrenschnitt</h3>
@@ -372,13 +668,13 @@
   <div class="container coiffeurin-grid">
     <div class="coiffeurin-media reveal">
       <figure class="coiffeurin-img coiffeurin-img--a">
-        <img src="assets/images/team/coiffeurin-01.png" alt="Die Inhaberin von The Hair Art's im Salon" loading="lazy">
+        <img src="assets/images/team/coiffeurin-01.jpg" alt="Die Inhaberin von The Hair Art's im Salon" loading="lazy">
       </figure>
       <figure class="coiffeurin-img coiffeurin-img--b">
-        <img src="assets/images/team/coiffeurin-02.png" alt="Die Coiffeurin vor dem Studio" loading="lazy">
+        <img src="assets/images/team/coiffeurin-02.jpg" alt="Die Coiffeurin vor dem Studio" loading="lazy">
       </figure>
       <figure class="coiffeurin-img coiffeurin-img--c">
-        <img src="assets/images/team/coiffeurin-03.png" alt="Portrait der Coiffeurin" loading="lazy">
+        <img src="assets/images/team/coiffeurin-03.jpg" alt="Portrait der Coiffeurin" loading="lazy">
       </figure>
     </div>
     <div class="coiffeurin-copy reveal">
@@ -394,12 +690,32 @@
 <!-- ===== BEAUTY — bewusst leise gehalten, nur ein Hinweis ===== -->
 <section class="beauty" id="beauty">
   <div class="container beauty-inner reveal">
-    <p class="eyebrow">Übrigens</p>
+    <!-- 3D-Blume aus reinem CSS: Blütenblätter als Flächen im Raum.
+         Öffnet und dreht sich mit dem Scrollfortschritt (--auf, --dreh
+         kommen aus script.js). Kein Modell, keine Bibliothek. -->
+    <div class="blume" id="blume" aria-hidden="true">
+      <div class="blume__kern">
+        <span class="blatt blatt--aussen" style="--i:0"></span>
+        <span class="blatt blatt--aussen" style="--i:1"></span>
+        <span class="blatt blatt--aussen" style="--i:2"></span>
+        <span class="blatt blatt--aussen" style="--i:3"></span>
+        <span class="blatt blatt--aussen" style="--i:4"></span>
+        <span class="blatt blatt--aussen" style="--i:5"></span>
+        <span class="blatt blatt--aussen" style="--i:6"></span>
+        <span class="blatt blatt--aussen" style="--i:7"></span>
+        <span class="blatt blatt--innen" style="--i:0"></span>
+        <span class="blatt blatt--innen" style="--i:1"></span>
+        <span class="blatt blatt--innen" style="--i:2"></span>
+        <span class="blatt blatt--innen" style="--i:3"></span>
+        <span class="blatt blatt--innen" style="--i:4"></span>
+        <span class="blume__mitte"></span>
+      </div>
+    </div>
+    <p class="eyebrow">Auf Wunsch</p>
     <p class="beauty-line">nicht nur Haare</p>
-    <p class="beauty-text">Im Studio gibt es auch kosmetische Behandlungen — von Faltenbehandlung
-      über Hautpflege bis zu allem, was dazugehört. Sprich uns einfach an, wir beraten dich in Ruhe
-      und ohne Verpflichtung.</p>
-    <a href="#termin" class="beauty-link" data-preselect="Beauty">Beratung anfragen</a>
+    <p class="beauty-text">Bei uns gibt es auch Botoxbehandlungen und kleine kosmetische Treatments.
+      Frag einfach im Salon — wir nehmen uns Zeit dafür.</p>
+    <a href="#termin" class="beauty-link" data-preselect="bitte beraten">Beratung anfragen</a>
   </div>
 </section>
 
@@ -492,17 +808,36 @@
       <div class="form-row">
         <label for="service">Wunschleistung</label>
         <select id="service" name="service">
-          <option>Balayage</option>
-          <option>Foilyage</option>
-          <option>Money Piece</option>
-          <option>Blondierung</option>
-          <option>Gloss &amp; Pflege</option>
-          <option>Schnitt &amp; Styling</option>
-          <option>Herrenschnitt</option>
-          <option>Herren &amp; Jungs — Locken</option>
-          <option>Kinderschnitt</option>
-          <option>Brautfrisur (inkl. Probetermin)</option>
-          <option>Beauty — kosmetische Beratung</option>
+          <optgroup label="Schnitt &amp; Styling">
+            <option>Haarschnitt — ab 50 €</option>
+            <option>Föhnen — ab 30 €</option>
+            <option>American Blow Dry — ab 120 €</option>
+            <option>Brazilian Blow Dry — ab 120 €</option>
+            <option>Dauerwelle — ab 100 €</option>
+          </optgroup>
+          <optgroup label="Farbe">
+            <option>Ombré, Sombré &amp; Balayage — ab 120 €</option>
+            <option>Babylights &amp; Brushlights — ab 150 €</option>
+            <option>Highlights — ab 100 €</option>
+            <option>Farbwechsel — ab 120 €</option>
+            <option>Ansatzfarbe — ab 55 €</option>
+            <option>Tönung — ab 70 €</option>
+            <option>Pigmentierung — ab 70 €</option>
+          </optgroup>
+          <optgroup label="Pflege">
+            <option>Hair Botox — 80 €</option>
+            <option>Keratin-Pflege — ab 80 €</option>
+            <option>Olaplex — ab 45 €</option>
+            <option>Micro Welding — auf Anfrage</option>
+          </optgroup>
+          <optgroup label="Herren &amp; Kinder">
+            <option>Herrenschnitt — ab 30 €</option>
+            <option>Lockenschnitt — ab 45 €</option>
+            <option>Kinderschnitt — ab 20 €</option>
+          </optgroup>
+          <optgroup label="Anlass">
+            <option>Brautfrisur (inkl. Probetermin)</option>
+          </optgroup>
           <option>Ich bin unsicher — bitte beraten</option>
         </select>
       </div>
@@ -534,38 +869,38 @@
   </div>
 </section>
 
-<!-- ===== INSTAGRAM ===== -->
-<section class="instagram" id="instagram">
+<!-- ===== INSTAGRAM-COVER — steht für die entfernte Beitragswand ===== -->
+<section class="ig-cover" id="instagram">
   <div class="container">
-    <p class="eyebrow center reveal">Social</p>
-    <h2 class="center reveal">Folge The Hair Art's auf Instagram</h2>
-    <a href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener" class="ig-handle reveal">@coiffeur_elif_</a>
+    <div class="ig-karte reveal">
 
-    <div class="instagram-grid" id="instagramGrid">
-      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
-        <img src="assets/images/instagram/ig-01.svg" alt="Instagram-Beitrag 1 von The Hair Art's" loading="lazy">
-        <span class="ig-icon">↗</span>
-      </a>
-      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
-        <img src="assets/images/instagram/ig-02.svg" alt="Instagram-Beitrag 2 von The Hair Art's" loading="lazy">
-        <span class="ig-icon">↗</span>
-      </a>
-      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
-        <img src="assets/images/instagram/ig-03.svg" alt="Instagram-Beitrag 3 von The Hair Art's" loading="lazy">
-        <span class="ig-icon">↗</span>
-      </a>
-      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
-        <img src="assets/images/instagram/ig-04.svg" alt="Instagram-Beitrag 4 von The Hair Art's" loading="lazy">
-        <span class="ig-icon">↗</span>
-      </a>
-      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
-        <img src="assets/images/instagram/ig-05.svg" alt="Instagram-Beitrag 5 von The Hair Art's" loading="lazy">
-        <span class="ig-icon">↗</span>
-      </a>
-      <a class="ig-item reveal" href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener">
-        <img src="assets/images/instagram/ig-06.svg" alt="Instagram-Beitrag 6 von The Hair Art's" loading="lazy">
-        <span class="ig-icon">↗</span>
-      </a>
+      <!-- Story-Ring mit Instagram-Symbol -->
+      <span class="ig-ring">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5.2"/>
+          <circle cx="12" cy="12" r="4.1"/>
+          <circle cx="17.4" cy="6.6" r="1.05" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+
+      <!-- Blüte als Verbindung zu den frischen Blumen im Laden -->
+      <svg class="ig-bluete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="7.4" r="3.1"/>
+        <circle cx="7.1" cy="11.4" r="2.6"/>
+        <circle cx="16.9" cy="11.4" r="2.6"/>
+        <path d="M12 22v-7.6"/>
+        <path d="M12 16.4c-1.9 0-3-1.1-3-2.6M12 18.6c1.9 0 3-1.1 3-2.6"/>
+      </svg>
+
+      <p class="ig-name">The Hair Art’s</p>
+      <p class="ig-handle">@coiffeur_elif_</p>
+      <p class="ig-text">Du findest uns natürlich auch auf Instagram — mit täglich neuen Stories
+        aus dem Studio.</p>
+
+      <a href="https://www.instagram.com/coiffeur_elif_/" target="_blank" rel="noopener"
+         class="btn btn-primary ig-btn">Auf Instagram folgen</a>
     </div>
   </div>
 </section>
@@ -615,13 +950,16 @@
   </div>
   <div class="container footer-bottom">
     <span>© <span id="year"></span> The Hair Art's</span>
-    <span>Made for the Pitch</span>
+    <a class="fijn-credit" href="https://fijncreation.studio" target="_blank" rel="noopener">
+      <span>Webdesign von</span>
+      <img src="assets/images/fijn/fijn-creation.png" alt="fijn.création studio berlin" width="420" height="198">
+    </a>
   </div>
 </footer>
 
 </div>
 
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/script.js?v=6"></script>
+<script src="assets/js/script.js?v=19"></script>
 </body>
 </html>
